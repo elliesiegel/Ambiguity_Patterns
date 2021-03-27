@@ -5,6 +5,8 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 [GlossBERT: BERT for Word Sense Disambiguation with Gloss Knowledge](https://arxiv.org/pdf/1908.07245.pdf)
 
+[Adapting BERT for Word Sense Disambiguation with Gloss Selection Objective and Example Sentences](https://arxiv.org/abs/2009.11795)
+
 [Identifying Elements Essential for BERT’s Multilinguality](https://arxiv.org/pdf/2005.00396.pdf)
 
 [Does BERT Make Any Sense? Interpretable Word Sense Disambiguation with Contextualized Embeddings](https://www.inf.uni-hamburg.de/en/inst/ab/lt/publications/2019-wiedemannetal-bert-sense.pdf)

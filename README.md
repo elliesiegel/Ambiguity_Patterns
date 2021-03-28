@@ -13,6 +13,8 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 [Identifying Elements Essential for BERT’s Multilinguality](https://arxiv.org/pdf/2005.00396.pdf)
 
+[Unsupervised Cross-lingual Representation Learning at Scale Alexis Conneau](https://www.aclweb.org/anthology/2020.acl-main.747.pdf)
+
 [Does BERT Make Any Sense? Interpretable Word Sense Disambiguation with Contextualized Embeddings](https://www.inf.uni-hamburg.de/en/inst/ab/lt/publications/2019-wiedemannetal-bert-sense.pdf)
 
 [mBERT](https://github.com/google-research/bert/blob/master/multilingual.md)

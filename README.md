@@ -15,6 +15,8 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 [Does BERT Make Any Sense? Interpretable Word Sense Disambiguation with Contextualized Embeddings](https://www.inf.uni-hamburg.de/en/inst/ab/lt/publications/2019-wiedemannetal-bert-sense.pdf)
 
+[mBERT](https://github.com/google-research/bert/blob/master/multilingual.md)
+
 [Word Sense Disambiguation using BERT, ELMo and Flair](https://github.com/uhh-lt/bert-sense) _s. "Does BERT Make Any Sense?"_
 
 [SENSEMBERT: Context-Enhanced Sense Embeddings for Multilingual Word Sense Disambiguation](http://sensembert.org/resources/scarlini_etal_aaai2020.pdf)

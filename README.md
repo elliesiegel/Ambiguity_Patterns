@@ -3,6 +3,8 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 **References**:
 
+[How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)
+
 [GlossBERT: BERT for Word Sense Disambiguation with Gloss Knowledge](https://arxiv.org/pdf/1908.07245.pdf)
 
 [GutHub Repo for GlossBERT](https://github.com/HSLCY/GlossBERT)

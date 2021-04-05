@@ -35,9 +35,9 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 [Word Sense Disambiguation: A Survey ROBERTO NAVIGLI Universita di Roma La Sapienza](http://wwwusers.di.uniroma1.it/~navigli/pubs/ACM_Survey_2009_Navigli.pdf)
 
-[1] Navigli, R., & Ponzetto, S. P. (2012). BabelNet: The automatic
+[1] [Navigli, R., & Ponzetto, S. P. (2012). BabelNet: The automatic
 construction, evaluation and application of a wide-coverage multilingual
-semantic network. Artificial Intelligence, 193, 217-250.
+semantic network. Artificial Intelligence, 193, 217-250.](http://wwwusers.di.uniroma1.it/~navigli/pubs/AIJ_2012_Navigli_Ponzetto.pdf)
 
 [2] Agirre, E., López de Lacalle, O., & Soroa, A. (2014). Random walks
 for knowledge-based word sense disambiguation. Computational

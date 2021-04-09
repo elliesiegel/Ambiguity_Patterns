@@ -13,6 +13,8 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 [GitHub Repo for Adapting BERT for WSD](https://github.com/BPYap/BERT-WSD)
 
+[Adapting BERT for WSD DATA](https://entuedu-my.sharepoint.com/personal/boonpeng001_e_ntu_edu_sg/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9lbnR1ZWR1LW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2Jvb25wZW5nMDAxX2VfbnR1X2VkdV9zZy9Fc2RGQ1doQXdpNU90MEl0Qk9TazNVRUJLOEZVd2xNU2lfalNyQk42RnJHcWh3P3J0aW1lPWtnbF9tRF83MkVn&id=%2Fpersonal%2Fboonpeng001%5Fe%5Fntu%5Fedu%5Fsg%2FDocuments%2FBERT%2DWSD%2Fdata)
+
 [Identifying Elements Essential for BERT’s Multilinguality](https://arxiv.org/pdf/2005.00396.pdf)
 
 [Unsupervised Cross-lingual Representation Learning at Scale Alexis Conneau](https://www.aclweb.org/anthology/2020.acl-main.747.pdf)

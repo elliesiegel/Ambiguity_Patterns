@@ -30,7 +30,7 @@ if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
     # SAVE data in json if the file with the ids does not exist:
     out_file = open(data_dir + input_word + "_synset_ids.json", "w") 
     json.dump(data, out_file, indent = 6) 
-
+    # TODO open the file with id because else won't be executed
 else:
     # print("********Test********")
     # LOADING existing json with ids
@@ -62,7 +62,7 @@ else:
                     except:
                         pass
 
-            # print("1st level : ", node_lst)
+    print("1st level : ", node_lst)
 
 
 G = nx.Graph()    

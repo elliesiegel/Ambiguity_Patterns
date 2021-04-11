@@ -1,0 +1,10 @@
+1st level :  [('compromiso', 'ES'), ('Verpflichtetsein', 'DE'), ('bono', 'ES'), ('certificado_de_adeudo', 'ES'), ('engagement', 'FR'), ('deber', 'ES'), ('devoir', 'FR')]
+
+
+('compromiso', 'ES')  -->  ('agreement', 'EN')
+('Verpflichtetsein', 'DE')  -->  ('obligation', 'EN')
+('bono', 'ES')  -->  ('bail', 'EN')
+('certificado_de_adeudo', 'ES')  -->  ('debt_instrument', 'EN')
+('engagement', 'FR')  -->  ('battle', 'EN')
+('deber', 'ES')  -->  ('attempt', 'EN')
+('devoir', 'FR')  -->  ('civic_duty', 'EN')

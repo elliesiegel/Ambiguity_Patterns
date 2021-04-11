@@ -1,0 +1,15 @@
+1st level :  [('anudar', 'ES'), ('Nudo_(matemática)', 'ES'), ('Knotentheorie', 'DE'), ('The_Knot', 'FR'), ('nudo', 'ES'), ('The_British_Bride_–_Binde_sich_wer_kann!', 'DE'), ('spline', 'ES'), ('Calidris_Canutus', 'ES'), ('nœud', 'FR'), ('anudar', 'ES'), ('lazo', 'ES'), ('anudar', 'ES'), ('nudo', 'ES'), ('nœud', 'FR'), ('nœud_héraldique', 'FR'), ('milla', 'ES')]
+
+2d level:
+('anudar', 'ES')  -->  ('connect', 'EN')
+('Knotentheorie', 'DE')  -->  ('knot_theory', 'EN')
+('The_Knot', 'FR')  -->  ('The_Knot', 'FR')
+('nudo', 'ES')  -->  ('cloverleaf', 'EN')
+('spline', 'ES')  -->  ('slat', 'EN')
+('Calidris_Canutus', 'ES')  -->  ('knot', 'EN')
+('anudar', 'ES')  -->  ('connect', 'EN')
+('lazo', 'ES')  -->  ('lace', 'EN')
+('anudar', 'ES')  -->  ('connect', 'EN')
+('nudo', 'ES')  -->  ('cloverleaf', 'EN')
+('milla', 'ES')  -->  ('mile', 'EN')
+

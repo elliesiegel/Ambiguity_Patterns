@@ -1,0 +1,44 @@
+**********
+initial word:  >  page  <
+**********
+1st level :  [('Page_(Familienname)', 'DE'), ('Page,_Minneapolis', 'EN'), ('Larry_Page', 'ES'), ('Page,_Nebraska', 'EN'), ('Page_(given_name)', 'EN'), ('Polyacrylamid-Gelelektrophorese', 'DE'), ('page', 'EN'), ('Page_County,_Virginia', 'EN'), ('Page', 'DE'), ('Page,_West_Virginia', 'EN'), ('Page,_North_Dakota', 'EN'), ('page', 'EN'), ('Page,_California', 'EN'), ('Página_de_memoria', 'ES'), ('Presidential_Ambassadors_for_Global_Entrepreneurship', 'EN'), ('Page_(Swedish_band)', 'EN'), ('Page', 'EN'), ('Page', 'EN'), ('Page,_Oklahoma', 'EN'), ('page', 'EN'), ('Brand_page', 'EN'), ("Free_(album_d'Iggy_Pop)", 'FR'), ('Foliotage', 'FR'), ('Page,_Virginia', 'EN'), ('foliate', 'EN'), ('Page_(novel)', 'EN'), ('Page_(assistance_occupation)', 'EN'), ('(71556)_Page', 'FR'), ('Page,_Washington', 'EN'), ('Page_(Zeitschrift)', 'DE'), ('Page_(South_Korean_band)', 'EN'), ('page', 'EN'), ('Page,_Australian_Capital_Territory', 'EN'), ('Polyacrylamide_gel_electrophoresis', 'EN'), ('William_Page_(Maler)', 'DE'), ('Page_boy_(wedding_attendant)', 'EN'), ('Spinning_Top_(EP)', 'EN'), ('Page_(MCC_cricketer)', 'EN'), ('PAGE', 'ES'), ('leaf', 'EN'), ('Page', 'EN'), ('Page_County,_Iowa', 'EN'), ('Circonscription_de_Page', 'FR'), ('Paje', 'ES'), ('Page,_Arizona', 'EN'), ('Roderic_D._M._Page', 'EN'), ('page', 'EN'), ('page', 'EN')]
+
+
+2nd level:
+
+('Page,_Minneapolis', 'EN')  -->  ('Page,_Minneapolis', 'EN')
+('Larry_Page', 'ES')  -->  ('Larry_Page', 'ES')
+('Page,_Nebraska', 'EN')  -->  ('Page,_Nebraska', 'EN')
+('Polyacrylamid-Gelelektrophorese', 'DE')  -->  ('Polyacrylamid-Gelelektrophorese', 'DE')
+('page', 'EN')  -->  ('bellboy', 'EN')
+('Page_County,_Virginia', 'EN')  -->  ('Page_County,_Virginia', 'EN')
+('Page', 'DE')  -->  ('bellboy', 'EN')
+('Page,_West_Virginia', 'EN')  -->  ('Page,_West_Virginia', 'EN')
+('Page,_North_Dakota', 'EN')  -->  ('Page,_North_Dakota', 'EN')
+('page', 'EN')  -->  ('bellboy', 'EN')
+('Page,_California', 'EN')  -->  ('Page,_California', 'EN')
+('Presidential_Ambassadors_for_Global_Entrepreneurship', 'EN')  -->  ('Presidential_Ambassadors_for_Global_Entrepreneurship', 'EN')
+('Page', 'EN')  -->  ('bellboy', 'EN')
+('Page', 'EN')  -->  ('bellboy', 'EN')
+('Page,_Oklahoma', 'EN')  -->  ('Page,_Oklahoma', 'EN')
+('page', 'EN')  -->  ('bellboy', 'EN')
+('Brand_page', 'EN')  -->  ('Brand_page', 'EN')
+('Foliotage', 'FR')  -->  ('Foliotage', 'FR')
+('Page,_Virginia', 'EN')  -->  ('Page,_Virginia', 'EN')
+('foliate', 'EN')  -->  ('Foliate_(software)', 'EN')
+('(71556)_Page', 'FR')  -->  ('(71556)_Page', 'FR')
+('Page,_Washington', 'EN')  -->  ('Page,_Washington', 'EN')
+('page', 'EN')  -->  ('bellboy', 'EN')
+('Page,_Australian_Capital_Territory', 'EN')  -->  ('Page,_Australian_Capital_Territory', 'EN')
+('Polyacrylamide_gel_electrophoresis', 'EN')  -->  ('Polyacrylamid-Gelelektrophorese', 'DE')
+('PAGE', 'ES')  -->  ('bellboy', 'EN')
+('leaf', 'EN')  -->  ('floral_leaf', 'EN')
+('Page', 'EN')  -->  ('bellboy', 'EN')
+('Page_County,_Iowa', 'EN')  -->  ('Page_County,_Iowa', 'EN')
+('Circonscription_de_Page', 'FR')  -->  ('Circonscription_de_Page', 'FR')
+('Paje', 'ES')  -->  ('cabin_boy', 'EN')
+('Page,_Arizona', 'EN')  -->  ('Page,_Arizona', 'EN')
+('Roderic_D._M._Page', 'EN')  -->  ('Roderic_D._M._Page', 'EN')
+('page', 'EN')  -->  ('bellboy', 'EN')
+('page', 'EN')  -->  ('bellboy', 'EN')
+

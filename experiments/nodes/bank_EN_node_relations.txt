@@ -1,0 +1,13 @@
+1st level :  [('Bánk', 'DE'), ('banco_de_memoria', 'ES'), ('Banco_oceánico', 'ES'), ('Bank_(Waffe)', 'DE'), ('banca', 'ES'), ('North_American_B-25', 'DE'), ('batería', 'ES'), ('banca', 'ES'), ('ladear', 'ES'), ('BANK1', 'FR'), ('Bank', 'ES'), ('operar_en_bancos', 'ES'), ('Bank', 'ES'), ('caja_de_caudales', 'ES'), ('AccessBank', 'FR'), ('banque', 'FR'), ('Charlot_garçon_de_banque', 'FR'), ('barrena', 'ES'), ('banque', 'FR'), ('Bánk', 'FR'), ('Hängebank', 'DE'), ('The_Bank_–_Skrupellos_und_machtbesessen', 'DE'), ('Hindernis_(Pferdesport)', 'DE'), ('Billet_de_500_euros', 'FR'), ('Rempart', 'FR'), ('barrena', 'ES'), ('Hauptstraße_20_(Volkach)', 'DE'), ('costa', 'ES'), ('confiar', 'ES'), ('bajío', 'ES'), ('Bank', 'FR'), ('Bank', 'FR'), ('banco', 'ES'), ('embancar', 'ES'), ('Schwedenstraße_1_(Kronach)', 'DE'), ('peralte', 'ES'), ('Banquier_(jeu_de_cartes)', 'FR'), ('apostar', 'ES'), ('banco', 'ES'), ('Bank', 'DE'), ('faire_le_banquier', 'FR'), ('margen', 'ES'), ('depositar', 'ES'), ('Grève_(géomorphologie_littorale)', 'FR')]
+
+
+2d level: 
+
+('banca', 'ES')  -->  ('banking', 'EN')
+('Bank', 'ES')  -->  ('bank', 'EN')
+('banque', 'FR')  -->  ('bank', 'EN')
+('barrena', 'ES')  -->  ('bore_bit', 'EN')
+('Bank', 'FR')  -->  ('bank', 'EN')
+('Bank', 'FR')  -->  ('bank', 'EN')
+('banco', 'ES')  -->  ('bank', 'EN')
+('Bank', 'DE')  -->  ('bank', 'EN')

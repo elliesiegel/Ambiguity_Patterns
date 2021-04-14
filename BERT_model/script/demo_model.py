@@ -1,4 +1,4 @@
-import argparse
+# import argparse
 import re
 
 import torch
@@ -10,6 +10,20 @@ from transformers import BertTokenizer
 from utils.dataset import GlossSelectionRecord, _create_features_from_records
 from utils.model import BertWSD, forward_gloss_selection
 from utils.wordnet import get_glosses
+
+import sys 
+import csv
+import pandas as pd
+
+
+def reader(file_name):
+    data_csv = pd.read_csv(file_name)
+    return data_csv
+
+file_name = sys.argv[1]
+df = reader(file_name)
+data_lst = df.values.tolist()
+
 
 MAX_SEQ_LENGTH = 128
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -52,7 +66,7 @@ def get_predictions(model, tokenizer, sentence):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    # parser = argparse.ArgumentParser()
 
     # Required parameters
     # parser.add_argument(
@@ -61,7 +75,7 @@ def main():
     #     type=str,
     #     help="Directory of pre-trained model."
     # )
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
     # Load fine-tuned model and vocabulary
     print("Loading model...")
@@ -84,8 +98,11 @@ def main():
     model.to(DEVICE)
     model.eval()
 
-    while True:
-        sentence = input("\nEnter a sentence with an ambiguous word surrounded by [TGT] tokens\n> ")
+    for row in data_lst:
+        # sentence = input("\nEnter a sentence with an ambiguous word surrounded by [TGT] tokens\n> ")
+        sentence = row[1]
+        glosses = row[3]
+        print(">> ", sentence, " <<", "\n", "sentence glosses: ", glosses, "\n")
         predictions = get_predictions(model, tokenizer, sentence)
         if predictions:
             print("\nPredictions:")
@@ -93,9 +110,9 @@ def main():
                 [[f"{i+1}.", key, gloss, f"{score:.5f}"] for i, (key, gloss, score) in enumerate(predictions)],
                 headers=["No.", "Sense key", "Definition", "Score"])
             )
-            # for i, (sense_key, definition, score) in enumerate(predictions):
-            #     # print(f"  {i + 1:>3}. sense key: {sense_key:<15} score: {score:<8.5f} definition: {definition}")
 
+            print("-"*30)
+            print()
 
 if __name__ == '__main__':
     main()

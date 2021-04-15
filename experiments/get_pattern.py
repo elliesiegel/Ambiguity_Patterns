@@ -1,6 +1,7 @@
 import sys
 import json
 import os.path
+import argparse
 import itertools
 import urllib.request
 
@@ -14,12 +15,33 @@ import matplotlib.pyplot as plt
 example call: python3 relations.py knot JSON_data/knot_en/
 '''
 
+parser = argparse.ArgumentParser()
+# Parameters
+parser.add_argument(
+                    "input_word",
+                    default=None,
+                    type=str,
+                    help="the word we want to get the pattern from."
+                    )
+
+parser.add_argument(
+                    "data_dir",
+                    default=None,
+                    type=str,
+                    help="Directory where to save documents from the BabelNet API."
+                    )
+
+args = parser.parse_args()
+
 # give the data directory with json files in it
-data_dir = sys.argv[2]
+# data_dir = sys.argv[2]
+data_dir = args.data_dir
 
 # lemma=page --> lemma=word
 # first argument "word" 
-input_word = sys.argv[1]
+# input_word = sys.argv[1]
+input_word = args.input_word
+
 print("*"*10)
 print("initial word: ", "> ", input_word, " <")
 print("*"*10)

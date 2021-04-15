@@ -8,11 +8,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 '''
-collects word information/synsets from BabelNet
-creates patterns
-'''
+- collects word information/synsets from BabelNet
+- creates patterns
 
-# example call: python3 relations.py knot JSON_data/knot_en/
+example call: python3 relations.py knot JSON_data/knot_en/
+'''
 
 # give the data directory with json files in it
 data_dir = sys.argv[2]

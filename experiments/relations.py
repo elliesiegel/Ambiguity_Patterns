@@ -7,6 +7,7 @@ import urllib.request
 import networkx as nx
 import matplotlib.pyplot as plt
 
+# example call: python3 relations.py knot JSON_data/knot_en/
 
 # give the data directory with json files in it
 data_dir = sys.argv[2]
@@ -18,6 +19,7 @@ print("*"*10)
 print("initial word: ", "> ", input_word, " <")
 print("*"*10)
 
+# TODO change to argparse
 # TODO: expand / change "searchLang=EN"
 # Comment out if limt reached ; if file with the word exists, skip:
 if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
@@ -32,6 +34,7 @@ if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
     json.dump(data, out_file, indent = 6) 
     # TODO open the file with id because else won't be executed
 else:
+    # TODO will not be called if os.path == False
     # print("********Test********")
     # LOADING existing json with ids
     node_lst = []

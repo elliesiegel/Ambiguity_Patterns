@@ -1,0 +1,17 @@
+1st level :  [('nota', 'ES'), ('carta', 'ES'), ('abonaré', 'ES'), ('Hinweis', 'DE'), ('anotación', 'ES'), ('nota', 'ES'), ('Duftnote', 'DE'), ('línea', 'ES'), ('distinción', 'ES'), ('notar', 'ES'), ('anotar', 'ES'), ('billete', 'ES'), ('mensaje', 'ES'), ('apuntar', 'ES'), ('anotación', 'ES'), ('advertir', 'ES'), ('nota', 'ES'), ('tono', 'ES'), ('albarán', 'ES')]
+
+
+('nota', 'ES')  -->  ('feature', 'EN')
+('carta', 'ES')  -->  ('a_la_carte', 'EN')
+('Hinweis', 'DE')  -->  ('heads-up', 'EN')
+('nota', 'ES')  -->  ('feature', 'EN')
+('Duftnote', 'DE')  -->  ('aroma', 'EN')
+('notar', 'ES')  -->  ('conveyancer', 'EN')
+('anotar', 'ES')  -->  ('annotate', 'EN')
+('billete', 'ES')  -->  ('tag', 'EN')
+('mensaje', 'ES')  -->  ('message', 'EN')
+('apuntar', 'ES')  -->  ('Pointing', 'EN')
+('advertir', 'ES')  -->  ('gain', 'EN')
+('nota', 'ES')  -->  ('feature', 'EN')
+('tono', 'ES')  -->  ('accent', 'EN')
+

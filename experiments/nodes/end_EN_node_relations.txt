@@ -1,0 +1,25 @@
+1st level :  [('Endomorphisme', 'FR'), ('cabo', 'ES'), ('finalizar', 'ES'), ('intrinsischer_Wert', 'DE'), ('Ende', 'DE'), ('END_(Band)', 'DE'), ('fin', 'ES'), ('The_End_(cortometraje)', 'ES'), ('terminer', 'FR'), ('bout', 'FR'), ('resto', 'ES'), ('lazo', 'ES'), ('End', 'DE'), ('Endoglina', 'ES'), ('acabar', 'ES'), ('Base_aérienne_de_Vance', 'FR'), ('Bout_(théorie_des_graphes)', 'FR'), ('fin', 'ES'), ('End_(Bad_Staffelstein)', 'DE'), ('Suicidez-moi_docteur', 'FR'), ('Ende_(Kategorientheorie)', 'DE'), ('destrucción', 'ES'), ('acabar', 'ES'), ('conclusión', 'ES'), ('cierre', 'ES'), ('The_End_(film,_2016)', 'FR'), ('Bout_(topologie)', 'FR'), ('fin', 'ES'), ('The_End_(film,_1998)', 'FR'), ('cara', 'ES'), ('acabamiento', 'ES'), ('fin', 'FR'), ('Profondeur_narcotique_équivalente', 'FR'), ('Ende_(Film)', 'DE'), ('Wish_(album_de_The_Cure)', 'FR')]
+
+
+('Endomorphisme', 'FR')  -->  ('Endomorphism', 'EN')
+('cabo', 'ES')  -->  ('cape', 'EN')
+('finalizar', 'ES')  -->  ('complete', 'EN')
+('intrinsischer_Wert', 'DE')  -->  ('Innerer_Wert', 'DE')
+('Ende', 'DE')  -->  ('end', 'EN')
+('fin', 'ES')  -->  ('end', 'EN')
+('terminer', 'FR')  -->  ('Oyer_and_terminer', 'ES')
+('bout', 'FR')  -->  ("apex_of_the_sun's_way", 'EN')
+('resto', 'ES')  -->  ('debris', 'EN')
+('lazo', 'ES')  -->  ('lace', 'EN')
+('End', 'DE')  -->  ('end', 'EN')
+('Endoglina', 'ES')  -->  ('Endoglin', 'EN')
+('acabar', 'ES')  -->  ('complete', 'EN')
+('fin', 'ES')  -->  ('end', 'EN')
+('Suicidez-moi_docteur', 'FR')  -->  ('Suicidez-moi_docteur', 'FR')
+('acabar', 'ES')  -->  ('complete', 'EN')
+('cierre', 'ES')  -->  ('lockdown', 'EN')
+('fin', 'ES')  -->  ('end', 'EN')
+('cara', 'ES')  -->  ('appearance', 'EN')
+('acabamiento', 'ES')  -->  ('end', 'EN')
+('fin', 'FR')  -->  ('end', 'EN')
+

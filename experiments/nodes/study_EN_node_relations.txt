@@ -1,0 +1,25 @@
+1st level :  [('estudiar', 'ES'), ('cursar', 'ES'), ('cogitación', 'ES'), ('analyse', 'FR'), ('estudio', 'ES'), ("Étude_d'échecs", 'FR'), ('estudio', 'ES'), ('considerar', 'ES'), ('estudio', 'ES'), ('contemplar', 'ES'), ('Character_designer', 'FR'), ('Onavo', 'FR'), ('bosquejo', 'ES'), ('meditación', 'ES'), ('estudio', 'ES'), ('estudio', 'ES'), ('Forschungsprojekt', 'DE'), ('analizar', 'ES'), ('estudio', 'ES'), ('area_de_jurisdicción', 'ES'), ('adquirir', 'ES'), ('estudio', 'ES'), ('Study', 'DE'), ('Jeune_homme_nu_assis_au_bord_de_la_mer', 'FR'), ('aprender', 'ES')]
+
+
+('estudiar', 'ES')  -->  ('perusal', 'EN')
+('cursar', 'ES')  -->  ('send', 'EN')
+('analyse', 'FR')  -->  ('analysis', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('considerar', 'ES')  -->  ('believe', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('contemplar', 'ES')  -->  ('behold', 'EN')
+('Character_designer', 'FR')  -->  ('Character_designer', 'FR')
+('Onavo', 'FR')  -->  ('Onavo', 'EN')
+('bosquejo', 'ES')  -->  ('cartoon', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('Forschungsprojekt', 'DE')  -->  ('scientific_research', 'EN')
+('analizar', 'ES')  -->  ('Analizador_sintáctico', 'ES')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('adquirir', 'ES')  -->  ('assume', 'EN')
+('estudio', 'ES')  -->  ('bedsitting_room', 'EN')
+('Study', 'DE')  -->  ('discipline', 'EN')
+('Jeune_homme_nu_assis_au_bord_de_la_mer', 'FR')  -->  ('Jeune_homme_nu_assis_au_bord_de_la_mer', 'FR')
+('aprender', 'ES')  -->  ('eruditeness', 'EN')
+

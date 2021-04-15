@@ -1,0 +1,15 @@
+1st level :  [('causa', 'ES'), ('Cause', 'DE'), ('causar', 'ES'), ('campaña', 'ES'), ('John_Cawse', 'ES'), ('acción', 'ES'), ('agente_causal', 'ES'), ('causa', 'ES'), ('causa', 'ES'), ('Etiopatogenia', 'ES'), 
+
+
+('causar', 'ES'), ('causar', 'ES')]
+('causa', 'ES')  -->  ('causal_agent', 'EN')
+('Cause', 'DE')  -->  ('brief', 'EN')
+('causar', 'ES')  -->  ('arouse', 'EN')
+('John_Cawse', 'ES')  -->  ('John_Cawse', 'EN')
+('agente_causal', 'ES')  -->  ('causal_agent', 'EN')
+('causa', 'ES')  -->  ('causal_agent', 'EN')
+('causa', 'ES')  -->  ('causal_agent', 'EN')
+('Etiopatogenia', 'ES')  -->  ('Etiopatogenia', 'ES')
+('causar', 'ES')  -->  ('arouse', 'EN')
+('causar', 'ES')  -->  ('arouse', 'EN')
+

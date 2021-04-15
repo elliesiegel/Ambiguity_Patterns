@@ -1,0 +1,13 @@
+1st level :  [('bruñir', 'ES'), ('apariencia', 'ES'), ('maquillar', 'ES'), ('Gloss', 'FR'), ('glosa', 'ES'), ('Gloss', 'ES'), ('comentar', 'ES'), ('glosa', 'ES'), ('barniz', 'ES'), ('Gloss_(film)', 'FR'), ('Gloss', 'DE'), ('glosar', 'ES')]
+
+('apariencia', 'ES')  -->  ('appearance', 'EN')
+('maquillar', 'ES')  -->  ('Maquillage', 'FR')
+('Gloss', 'FR')  -->  ('gloss', 'EN')
+('glosa', 'ES')  -->  ('gloss', 'EN')
+('Gloss', 'ES')  -->  ('gloss', 'EN')
+('comentar', 'ES')  -->  ('comment', 'EN')
+('glosa', 'ES')  -->  ('gloss', 'EN')
+('barniz', 'ES')  -->  ('lacquer', 'EN')
+('Gloss', 'DE')  -->  ('gloss', 'EN')
+('glosar', 'ES')  -->  ('gloss', 'EN')
+

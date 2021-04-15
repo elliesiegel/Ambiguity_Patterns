@@ -1,0 +1,9 @@
+1st level :  [('Wrestling', 'FR'), ('La_Lutte', 'FR'), ('agarre', 'ES'), ('Catch', 'FR'), ('Wrestling', 'FR'), ('acareamiento', 'ES')]
+
+('Wrestling', 'FR')  -->  ('professional_wrestling', 'EN')
+('La_Lutte', 'FR')  -->  ('La_Lutte', 'FR')
+('agarre', 'ES')  -->  ('clasp', 'EN')
+('Catch', 'FR')  -->  ('game', 'EN')
+('Wrestling', 'FR')  -->  ('professional_wrestling', 'EN')
+('acareamiento', 'ES')  -->  ('wrestle', 'EN')
+

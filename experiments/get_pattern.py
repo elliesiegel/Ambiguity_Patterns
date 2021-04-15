@@ -59,7 +59,6 @@ def check_files_getSynset_exist(idx):
 
 def check_files_getSenses_exist(further_word): # for further word
     if os.path.isfile(data_dir + further_word + "_wordSenses.json") == False:
-        # print("#*"*20)
         # CALL if files do not exist else give the files in
         try:
             # [word] may have non ascii chars
@@ -77,22 +76,6 @@ def check_files_getSenses_exist(further_word): # for further word
 
 # TODO change to argparse
 # TODO: expand / change "searchLang=EN"
-# Comment out if limt reached ; if file with the word exists, skip:
-# if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
-#     # print("#*"*20)
-#     url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
-#     url = url.replace("[word]", input_word)
-#     web_get_synset_ids = urllib.request.urlopen(url)
-#     data = json.load(web_get_synset_ids) 
-
-#     # SAVE data in json if the file with the ids does not exist:
-#     out_file = open(data_dir + input_word + "_synset_ids.json", "w") 
-#     json.dump(data, out_file, indent = 6) 
-#     # TODO open the file with id because else won't be executed
-
-# TODO will not be called if os.path == False
-# print("********Test********")
-# LOADING existing json with ids
 
 files_checker = check_files_SynsetIds_exist(data_dir, input_word)
 if files_checker:
@@ -108,7 +91,7 @@ with open(data_dir + input_word + "_synset_ids.json", "r") as synsets_id_json_fi
         idx = elem["id"]
         if check_files_getSynset_exist(idx) == False: # the files exist already 
             with open(data_dir + idx +"_"+ input_word + "_wordsynsets.json", "r") as word_synsets_json:
-                word_synserts = json.load(word_synsets_json) #TODO problem with valid json
+                word_synserts = json.load(word_synsets_json)
                 try:
                     node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
                     node_lst.append(node)
@@ -118,7 +101,7 @@ with open(data_dir + input_word + "_synset_ids.json", "r") as synsets_id_json_fi
             check_files_getSynset_exist(idx)
             ###### copied from above -- TODO node_lst will not be filled with node values
             with open(data_dir + idx +"_"+ input_word + "_wordsynsets.json", "r") as word_synsets_json:
-                word_synserts = json.load(word_synsets_json) #TODO problem with valid json
+                word_synserts = json.load(word_synsets_json)
                 try:
                     node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
                     node_lst.append(node)
@@ -136,8 +119,6 @@ for elem in node_lst:
     G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
     further_word = elem[0]
     if check_files_getSenses_exist(further_word) == False:
-    # else:
-    # print("********Test********")
         try:
             with open(data_dir + further_word + "_wordSenses.json", "r") as further_word_json:
                 further_word_senses = json.load(further_word_json)

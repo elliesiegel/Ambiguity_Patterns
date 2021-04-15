@@ -99,7 +99,6 @@ def main():
     model.eval()
 
     for row in data_lst:
-        # sentence = input("\nEnter a sentence with an ambiguous word surrounded by [TGT] tokens\n> ")
         sentence = row[1]
         glosses = row[3]
         print(">> ", sentence, " <<", "\n", "sentence glosses: ", glosses, "\n")

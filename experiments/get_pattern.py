@@ -31,7 +31,31 @@ parser.add_argument(
                     help="Directory where to save documents from the BabelNet API."
                     )
 
+parser.add_argument(
+                    "--targetLang_searchLang",
+                    default="DE_ES_FR", # CS_IT_NN
+                    type=str,
+                    help="languages for search/target (the BabelNet API is restricted to max 3 languages)."
+                    )
+
+parser.add_argument(
+                    "--languages",
+                    nargs='+',
+                    default=["DE_ES_FR", "CS_IT_NN"],
+                    help="languages for reading/opening saved BabelNet data."
+                    )
+
 args = parser.parse_args()
+
+saved_languages = args.languages
+print(saved_languages, "**********************")
+
+# must be in the saved_languages list
+targetLang_searchLang = args.targetLang_searchLang
+lang_lst = targetLang_searchLang.split("_")
+lan_1 = lang_lst[0]
+lan_2 = lang_lst[1]
+lan_3 = lang_lst[2]
 
 # give the data directory with json files in it
 # data_dir = sys.argv[2]
@@ -47,9 +71,10 @@ print("initial word: ", "> ", input_word, " <")
 print("*"*10)
 
 
+# TODO: expand / change "searchLang=EN" to argparse arg
 def check_files_SynsetIds_exist(data_dir, input_word):
     # if the id file does not exist, create one:
-    if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
+    if os.path.isfile(data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json") == False:
 
         url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
         url = url.replace("[word]", input_word)
@@ -57,21 +82,25 @@ def check_files_SynsetIds_exist(data_dir, input_word):
         data = json.load(web_get_synset_ids) 
 
         # SAVE data in json if the file with the ids does not exist:
-        out_file = open(data_dir + input_word + "_synset_ids.json", "w") 
+        out_file = open(data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json", "w") 
         json.dump(data, out_file, indent = 6) 
     
         return True
         
-def check_files_getSynset_exist(idx):
-    if os.path.isfile(data_dir + idx +"_"+ input_word + "_wordsynsets.json") == False:
+def check_files_getSynset_exist(idx, lan_1, lan_2, lan_3):
+    if os.path.isfile(data_dir + idx +"_"+ input_word + "_" + targetLang_searchLang + "_wordsynsets.json") == False:
         # sometimes no senses are given, hence error "IndexError: list index out of range" occurs, so catching
         try:
             # id=bn:00091387v --> id=extracted_id
-            url_for_lemmas = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=DE&targetLang=ES&targetLang=FR&targetLang=EN&targetLang=IT&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
+            url_for_lemmas = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=[lan_1]&targetLang=[lan_2]&targetLang=[lan_3]&targetLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
             url_for_lemmas = url_for_lemmas.replace("[synset_id]", idx)
+            url_for_lemmas = url_for_lemmas.replace("[lan_1]", lan_1)
+            url_for_lemmas = url_for_lemmas.replace("[lan_2]", lan_2)
+            url_for_lemmas = url_for_lemmas.replace("[lan_3]", lan_3)
+
             web_get_synsets = urllib.request.urlopen(url_for_lemmas)
             data_synsets = json.load(web_get_synsets)
-            out_file = open(data_dir + idx +"_"+ input_word + "_wordsynsets.json", "w") 
+            out_file = open(data_dir + idx +"_"+ input_word + "_" + targetLang_searchLang + "_wordsynsets.json", "w") 
             json.dump(data_synsets, out_file, indent = 6) 
         except:
             pass
@@ -79,16 +108,20 @@ def check_files_getSynset_exist(idx):
     else:
         return False
 
-def check_files_getSenses_exist(further_word): # for further word
-    if os.path.isfile(data_dir + further_word + "_wordSenses.json") == False:
+def check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3): # for further word
+    if os.path.isfile(data_dir + further_word + "_" + targetLang_searchLang + "_wordSenses.json") == False:
         # CALL if files do not exist else give the files in
         try:
             # [word] may have non ascii chars
-            url = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=EN&searchLang=DE&searchLang=FR&searchLang=ES&searchLang=IT&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
+            url = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=[lan_1]&searchLang=[lan_2]&searchLang=[lan_3]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
             url = url.replace("[word]", further_word)
+            url = url.replace("[lan_1]", lan_1)
+            url = url.replace("[lan_2]", lan_2)
+            url = url.replace("[lan_3]", lan_3)
+
             web_get_synset_ids = urllib.request.urlopen(url)
             further_word_data = json.load(web_get_synset_ids)
-            out_file = open(data_dir + further_word + "_wordSenses.json", "w") 
+            out_file = open(data_dir + further_word + "_" + targetLang_searchLang + "_wordSenses.json", "w") 
             json.dump(further_word_data, out_file, indent = 6) 
         except:
                 pass
@@ -96,8 +129,6 @@ def check_files_getSenses_exist(further_word): # for further word
     else: 
         return False
 
-# TODO change to argparse
-# TODO: expand / change "searchLang=EN"
 
 files_checker = check_files_SynsetIds_exist(data_dir, input_word)
 if files_checker:
@@ -107,29 +138,30 @@ else:
 print()
 
 node_lst = []
-with open(data_dir + input_word + "_synset_ids.json", "r") as synsets_id_json_file:
-    synset_ids = json.load(synsets_id_json_file)
-    for elem in synset_ids:
-        idx = elem["id"]
-        if check_files_getSynset_exist(idx) == False: # the files exist already 
-            with open(data_dir + idx +"_"+ input_word + "_wordsynsets.json", "r") as word_synsets_json:
-                word_synserts = json.load(word_synsets_json)
-                try:
-                    node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
-                    node_lst.append(node)
-                except:
-                    pass
-        else:
-            check_files_getSynset_exist(idx)
-            ###### copied from above -- TODO node_lst will not be filled with node values
-            with open(data_dir + idx +"_"+ input_word + "_wordsynsets.json", "r") as word_synsets_json:
-                word_synserts = json.load(word_synsets_json)
-                try:
-                    node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
-                    node_lst.append(node)
-                except:
-                    pass
-            ###### 
+for lang_set in saved_languages:
+    with open(data_dir + input_word + "_" + lang_set + "_synset_ids.json", "r") as synsets_id_json_file:
+        synset_ids = json.load(synsets_id_json_file)
+        for elem in synset_ids:
+            idx = elem["id"]
+            if check_files_getSynset_exist(idx, lan_1, lan_2, lan_3) == False: # the files exist already 
+                with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
+                    word_synserts = json.load(word_synsets_json)
+                    try:
+                        node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
+                        node_lst.append(node)
+                    except:
+                        pass
+            else:
+                check_files_getSynset_exist(idx, lan_1, lan_2, lan_3)
+                ###### copied from above -- TODO node_lst will not be filled with node values
+                with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
+                    word_synserts = json.load(word_synsets_json)
+                    try:
+                        node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
+                        node_lst.append(node)
+                    except:
+                        pass
+                ###### 
 
     print("1st level : ", node_lst)
 
@@ -140,31 +172,33 @@ G = nx.Graph()
 for elem in node_lst:
     G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
     further_word = elem[0]
-    if check_files_getSenses_exist(further_word) == False:
-        try:
-            with open(data_dir + further_word + "_wordSenses.json", "r") as further_word_json:
-                further_word_senses = json.load(further_word_json)
-                try:
-                    further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
-                    print(elem, " --> ", further_node)
-                    G.add_edges_from([(elem, further_node)])
-                except:
-                    pass
-        except:
-            pass
+    if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
+        for lang_set in saved_languages:
+            try:
+                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
+                    further_word_senses = json.load(further_word_json)
+                    try:
+                        further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
+                        print(elem, " --> ", further_node)
+                        G.add_edges_from([(elem, further_node)])
+                    except:
+                        pass
+            except:
+                pass
     else:
-        check_files_getSenses_exist(further_word)
-        try:
-            with open(data_dir + further_word + "_wordSenses.json", "r") as further_word_json:
-                further_word_senses = json.load(further_word_json)
-                try:
-                    further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
-                    print(elem, " --> ", further_node)
-                    G.add_edges_from([(elem, further_node)])
-                except:
-                    pass
-        except:
-            pass
+        check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3)
+        for lang_set in saved_languages:
+            try:
+                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
+                    further_word_senses = json.load(further_word_json)
+                    try:
+                        further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
+                        print(elem, " --> ", further_node)
+                        G.add_edges_from([(elem, further_node)])
+                    except:
+                        pass
+            except:
+                pass
 
 
 nx.draw_networkx(G)

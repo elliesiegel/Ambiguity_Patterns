@@ -1,0 +1,29 @@
+1st level :  [('Wrestling', 'FR'), ('Wrestling_(2008_film)', 'EN'), ('La_Lutte', 'FR'), ('wrestling', 'EN'), ('Catch', 'FR'), ('Wrestling', 'EN'), ('Love_Match', 'EN'), ('wrestle', 'EN')]
+1st level :  [('Wrestling', 'FR'), ('Wrestling_(2008_film)', 'EN'), ('La_Lutte', 'FR'), ('wrestling', 'EN'), ('Catch', 'FR'), ('Wrestling', 'EN'), ('Love_Match', 'EN'), ('wrestle', 'EN'), ('Wrestling', 'NN'), ('Wrestling_(2008_film)', 'EN'), ('Wrestling_(1961_film)', 'EN'), ('wrestling', 'EN'), ('professional_wrestling', 'EN'), ('Wrestling', 'EN'), ('Love_Match', 'EN'), ('wrestle', 'EN')]
+
+
+('Wrestling', 'FR')  -->  ('professional_wrestling', 'EN')
+('Wrestling', 'FR')  -->  ('wrestle', 'EN')
+('La_Lutte', 'FR')  -->  ('La_Lutte', 'FR')
+('wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('wrestling', 'EN')  -->  ('wrestle', 'EN')
+('Catch', 'FR')  -->  ('catch', 'EN')
+('Wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('Wrestling', 'EN')  -->  ('wrestle', 'EN')
+('Love_Match', 'EN')  -->  ('love_match', 'EN')
+('Love_Match', 'EN')  -->  ('love_match', 'EN')
+('wrestle', 'EN')  -->  ('wrestle', 'EN')
+('wrestle', 'EN')  -->  ('wrestle', 'EN')
+('Wrestling', 'NN')  -->  ('professional_wrestling', 'EN')
+('Wrestling', 'NN')  -->  ('wrestle', 'EN')
+('wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('wrestling', 'EN')  -->  ('wrestle', 'EN')
+('professional_wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('professional_wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('Wrestling', 'EN')  -->  ('professional_wrestling', 'EN')
+('Wrestling', 'EN')  -->  ('wrestle', 'EN')
+('Love_Match', 'EN')  -->  ('love_match', 'EN')
+('Love_Match', 'EN')  -->  ('love_match', 'EN')
+('wrestle', 'EN')  -->  ('wrestle', 'EN')
+('wrestle', 'EN')  -->  ('wrestle', 'EN')
+

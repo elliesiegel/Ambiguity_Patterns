@@ -44,6 +44,7 @@ parser.add_argument(
                     default=["DE_ES_FR", "CS_IT_NN"],
                     help="languages for reading/opening saved BabelNet data."
                     )
+# DE, FR, ES, IT, EN, CS, NN, NO, TR, RU, UK, PL
 
 args = parser.parse_args()
 

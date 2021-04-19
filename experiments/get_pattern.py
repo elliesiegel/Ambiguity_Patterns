@@ -169,6 +169,7 @@ for lang_set in saved_languages:
 
 G = nx.Graph()    
 
+# words_for_embeddings = set()
 # SAVE further meanings of words in node_lst:
 for elem in node_lst:
     G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
@@ -180,7 +181,11 @@ for elem in node_lst:
                     further_word_senses = json.load(further_word_json)
                     try:
                         further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
-                        print(elem, " --> ", further_node)
+                        # words_for_embeddings.add(elem[0])
+                        # words_for_embeddings.add(further_node[0])
+                        # TODO save in a separate file to pass to word_embeds.py
+                        print(elem[0])
+                        print(further_node[0])
                         G.add_edges_from([(elem, further_node)])
                     except:
                         pass
@@ -201,6 +206,8 @@ for elem in node_lst:
             except:
                 pass
 
+# for word in words_for_embeddings:
+#     print(word)
 
 nx.draw_networkx(G)
 plt.show()

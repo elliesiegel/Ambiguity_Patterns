@@ -33,14 +33,14 @@ parser.add_argument(
                     )
 
 parser.add_argument(
-                    "--targetLang_searchLang",
+                    "--targetLang_searchLang",  # languages we want to gather information from
                     default="DE_ES_FR", # CS_IT_NN
                     type=str,
                     help="languages for search/target (the BabelNet API is restricted to max 3 languages)."
                     )
 
 parser.add_argument(
-                    "--languages",
+                    "--languages",  # languages to open files from
                     nargs='+',
                     default=["DE_ES_FR", "CS_IT_NN"],
                     help="languages for reading/opening saved BabelNet data."
@@ -152,26 +152,44 @@ for lang_set in saved_languages:
                 with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
                     word_synserts = json.load(word_synsets_json)
                     try:
-                        node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
-                        node_lst.append(node)
+                        for one_dict in word_synserts:
+                            # print(one_dict["properties"])
+                            # print()
+                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            node_lst.append(lemma_and_lang)
+                            # print("**********************************************")
                     except:
-                        pass
+                        for one_dict in word_synserts["senses"]:
+                            # print(one_dict["properties"])
+                            # print()
+                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            node_lst.append(lemma_and_lang)
+                            # print("**********************************************")
             else:
                 check_files_getSynset_exist(idx, lan_1, lan_2, lan_3)
                 ###### copied from above -- TODO node_lst will not be filled with node values
                 with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
                     word_synserts = json.load(word_synsets_json)
                     try:
-                        node = (word_synserts["senses"][0]["properties"]["fullLemma"], word_synserts["senses"][0]["properties"]["language"])
-                        node_lst.append(node)
+                        for one_dict in word_synserts:
+                            # print(one_dict["properties"])
+                            # print()
+                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            node_lst.append(lemma_and_lang)
+                            # print("**********************************************")
                     except:
-                        pass
+                        for one_dict in word_synserts["senses"]:
+                            # print(one_dict["properties"])
+                            # print()
+                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            node_lst.append(lemma_and_lang)
+                            # print("**********************************************")
                 ###### 
 
     print("1st level : ", node_lst)
 
 
-G = nx.Graph()    
+G = nx.Graph()
 
 # SAVE further meanings of words in node_lst:
 for elem in node_lst:
@@ -182,12 +200,10 @@ for elem in node_lst:
             try:
                 with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
                     further_word_senses = json.load(further_word_json)
-                    try:
-                        further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
+                    for one_dict in further_word_senses:
+                        further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         print(elem, " --> ", further_node)
                         G.add_edges_from([(elem, further_node)])
-                    except:
-                        pass
             except:
                 pass
     else:
@@ -196,12 +212,10 @@ for elem in node_lst:
             try:
                 with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
                     further_word_senses = json.load(further_word_json)
-                    try:
-                        further_node = (further_word_senses[0]["properties"]["fullLemma"], further_word_senses[0]["properties"]["language"])
+                    for one_dict in further_word_senses:
+                        further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         print(elem, " --> ", further_node)
                         G.add_edges_from([(elem, further_node)])
-                    except:
-                        pass
             except:
                 pass
 

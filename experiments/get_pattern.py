@@ -220,5 +220,23 @@ for elem in node_lst:
                 pass
 
 
-nx.draw_networkx(G)
-plt.show()
+# nx.draw_networkx(G)
+# plt.show()
+
+from bokeh.io import output_file, show
+from bokeh.plotting import figure, from_networkx
+
+# G = nx.karate_club_graph()
+
+plot = figure(title="Networkx Integration Demonstration", x_range=(-1.1,1.1), y_range=(-1.1,1.1),
+              tools="", toolbar_location=None)
+
+graph = from_networkx(G, nx.spring_layout, scale=2, center=(0,0)) # Error !!!
+# raise ValueError(f"failed to validate {obj_repr}.{name}: {error}")
+# ValueError: failed to validate StaticLayoutProvider(id='1031', ...).graph_layout: 
+# expected an element of Dict(Either(String, Int), Seq(Any)), got {'wrestling': array([-0.262687  ,  0.20170794])
+
+plot.renderers.append(graph)
+
+output_file("networkx_graph.html")
+show(plot)

@@ -1,3 +1,4 @@
+import os
 import sys
 import json
 import os.path
@@ -12,7 +13,7 @@ import matplotlib.pyplot as plt
 - collects word information/synsets from BabelNet
 - creates patterns
 
-example call: python3 relations.py knot JSON_data/knot_en/
+example call: python3 get_pattern.py knot JSON_data/knot_en/
 '''
 
 parser = argparse.ArgumentParser()
@@ -44,7 +45,8 @@ parser.add_argument(
                     default=["DE_ES_FR", "CS_IT_NN"],
                     help="languages for reading/opening saved BabelNet data."
                     )
-# DE, FR, ES, IT, EN, CS, NN, NO, TR, RU, UK, PL
+# indo-europ.: DE, FR, ES, IT, EN, CS, NN, NO, RU, UK, PL
+# others: TR
 
 args = parser.parse_args()
 
@@ -61,6 +63,8 @@ lan_3 = lang_lst[2]
 # give the data directory with json files in it
 # data_dir = sys.argv[2]
 data_dir = args.data_dir
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
 
 # lemma=page --> lemma=word
 # first argument "word" 

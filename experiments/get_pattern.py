@@ -34,7 +34,7 @@ parser.add_argument(
 
 parser.add_argument(
                     "--targetLang_searchLang",  # languages we want to gather information from
-                    default="DE_ES_FR", # CS_IT_NN
+                    default="DE_ES_FR", # CS_IT_NN   RU_UK_PL
                     type=str,
                     help="languages for search/target (the BabelNet API is restricted to max 3 languages)."
                     )
@@ -42,7 +42,7 @@ parser.add_argument(
 parser.add_argument(
                     "--languages",  # languages to open files from
                     nargs='+',
-                    default=["DE_ES_FR", "CS_IT_NN"],
+                    default=["DE_ES_FR", "CS_IT_NN", "RU_UK_PL"],
                     help="languages for reading/opening saved BabelNet data."
                     )
 # indo-europ.: DE, FR, ES, IT, EN, CS, NN, NO, RU, UK, PL

@@ -1,4 +1,5 @@
 import os
+import csv
 import sys
 import json
 import os.path
@@ -156,6 +157,7 @@ for lang_set in saved_languages:
                             # print(one_dict["properties"])
                             # print()
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            lemma_and_lang = lemma_and_lang[0] + "_" + lemma_and_lang[1]
                             node_lst.append(lemma_and_lang)
                             # print("**********************************************")
                     except:
@@ -163,6 +165,7 @@ for lang_set in saved_languages:
                             # print(one_dict["properties"])
                             # print()
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            lemma_and_lang = lemma_and_lang[0] + "_" + lemma_and_lang[1]
                             node_lst.append(lemma_and_lang)
                             # print("**********************************************")
             else:
@@ -175,6 +178,7 @@ for lang_set in saved_languages:
                             # print(one_dict["properties"])
                             # print()
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            lemma_and_lang = lemma_and_lang[0] + "_" + lemma_and_lang[1]
                             node_lst.append(lemma_and_lang)
                             # print("**********************************************")
                     except:
@@ -182,6 +186,7 @@ for lang_set in saved_languages:
                             # print(one_dict["properties"])
                             # print()
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            lemma_and_lang = lemma_and_lang[0] + "_" + lemma_and_lang[1]
                             node_lst.append(lemma_and_lang)
                             # print("**********************************************")
                 ###### 
@@ -189,54 +194,55 @@ for lang_set in saved_languages:
     print("1st level : ", node_lst)
 
 
-G = nx.Graph()
+# G = nx.Graph()
 
-# SAVE further meanings of words in node_lst:
-for elem in node_lst:
-    G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
-    further_word = elem[0]
-    if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
-        for lang_set in saved_languages:
-            try:
-                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
-                    further_word_senses = json.load(further_word_json)
-                    for one_dict in further_word_senses:
-                        further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        print(elem, " --> ", further_node)
-                        G.add_edges_from([(elem, further_node)])
-            except:
-                pass
-    else:
-        check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3)
-        for lang_set in saved_languages:
-            try:
-                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
-                    further_word_senses = json.load(further_word_json)
-                    for one_dict in further_word_senses:
-                        further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        print(elem, " --> ", further_node)
-                        G.add_edges_from([(elem, further_node)])
-            except:
-                pass
+header = ["build_relations_from", "build_relations_to"]
+
+path_to_saved_csv = "Cytoscape/" + input_word + "_nodes.csv"
+with open(path_to_saved_csv, 'w', encoding='UTF8') as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    # writer.writerow([key, value_raw, result_val_cond])
+    # SAVE further meanings of words in node_lst:
+    for elem in node_lst:
+        # G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
+        writer.writerow([elem, input_word])
+        further_word = elem[0]
+        if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
+            for lang_set in saved_languages:
+                try:
+                    with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
+                        further_word_senses = json.load(further_word_json)
+                        for one_dict in further_word_senses:
+                            # further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            # print(elem, " --> ", further_node)
+                            further_node = one_dict["properties"]["fullLemma"] +"_"+ one_dict["properties"]["language"]
+                            # G.add_edges_from([(elem, further_node)])
+                            writer.writerow([elem, further_node])
+                except:
+                    pass
+        else:
+            check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3)
+            for lang_set in saved_languages:
+                try:
+                    with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
+                        further_word_senses = json.load(further_word_json)
+                        for one_dict in further_word_senses:
+                            # further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            # print(elem, " --> ", further_node)
+                            further_node = one_dict["properties"]["fullLemma"] +"_"+ one_dict["properties"]["language"]
+                            # G.add_edges_from([(elem, further_node)])
+                            writer.writerow([elem, further_node])
+                except:
+                    pass
 
 
 # nx.draw_networkx(G)
 # plt.show()
 
-from bokeh.io import output_file, show
-from bokeh.plotting import figure, from_networkx
 
-# G = nx.karate_club_graph()
+# from nxviz.plots import CircosPlot
+# c = CircosPlot(graph=G)
+# c.draw()
 
-plot = figure(title="Networkx Integration Demonstration", x_range=(-1.1,1.1), y_range=(-1.1,1.1),
-              tools="", toolbar_location=None)
-
-graph = from_networkx(G, nx.spring_layout, scale=2, center=(0,0)) # Error !!!
-# raise ValueError(f"failed to validate {obj_repr}.{name}: {error}")
-# ValueError: failed to validate StaticLayoutProvider(id='1031', ...).graph_layout: 
-# expected an element of Dict(Either(String, Int), Seq(Any)), got {'wrestling': array([-0.262687  ,  0.20170794])
-
-plot.renderers.append(graph)
-
-output_file("networkx_graph.html")
-show(plot)
+# plt.show()

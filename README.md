@@ -3,17 +3,20 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 **References**:
 
-[How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)
-
-[GlossBERT: BERT for Word Sense Disambiguation with Gloss Knowledge](https://arxiv.org/pdf/1908.07245.pdf)
-
-[GutHub Repo for GlossBERT](https://github.com/HSLCY/GlossBERT)
+[XL-WSD: An Extra-Large and Cross-Lingual Evaluation Framework
+for Word Sense Disambiguation](https://sapienzanlp.github.io/xl-wsd/assets/paper/xl-wsd-aaai2021.pdf)
 
 [Adapting BERT for Word Sense Disambiguation with Gloss Selection Objective and Example Sentences](https://arxiv.org/abs/2009.11795)
 
 [GitHub Repo for Adapting BERT for WSD](https://github.com/BPYap/BERT-WSD)
 
 [Adapting BERT for WSD DATA](https://entuedu-my.sharepoint.com/personal/boonpeng001_e_ntu_edu_sg/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9lbnR1ZWR1LW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2Jvb25wZW5nMDAxX2VfbnR1X2VkdV9zZy9Fc2RGQ1doQXdpNU90MEl0Qk9TazNVRUJLOEZVd2xNU2lfalNyQk42RnJHcWh3P3J0aW1lPWtnbF9tRF83MkVn&id=%2Fpersonal%2Fboonpeng001%5Fe%5Fntu%5Fedu%5Fsg%2FDocuments%2FBERT%2DWSD%2Fdata)
+
+[How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)
+
+[GlossBERT: BERT for Word Sense Disambiguation with Gloss Knowledge](https://arxiv.org/pdf/1908.07245.pdf)
+
+[GutHub Repo for GlossBERT](https://github.com/HSLCY/GlossBERT)
 
 [Identifying Elements Essential for BERT’s Multilinguality](https://arxiv.org/pdf/2005.00396.pdf)
 

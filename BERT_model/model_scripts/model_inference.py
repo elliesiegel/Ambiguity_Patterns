@@ -1,4 +1,4 @@
-# import argparse
+import argparse
 import re
 
 import torch
@@ -20,9 +20,9 @@ def reader(file_name):
     data_csv = pd.read_csv(file_name)
     return data_csv
 
-file_name = sys.argv[1]
-df = reader(file_name)
-data_lst = df.values.tolist()
+# file_name = sys.argv[1]
+# df = reader(file_name)
+# data_lst = df.values.tolist()
 
 
 MAX_SEQ_LENGTH = 128
@@ -66,7 +66,11 @@ def get_predictions(model, tokenizer, sentence):
 
 
 def main():
-    # parser = argparse.ArgumentParser()
+    # file_name = sys.argv[1]
+    # df = reader(file_name)
+    # data_lst = df.values.tolist()
+
+    parser = argparse.ArgumentParser()
 
     # Required parameters
     # parser.add_argument(
@@ -75,22 +79,26 @@ def main():
     #     type=str,
     #     help="Directory of pre-trained model."
     # )
-    # args = parser.parse_args()
+    parser.add_argument(
+        "file_name",
+        default=None,
+        type=str,
+        help="name of the file with sentences and [TGT]-marked ambiguous words in them."
+    )
+
+    args = parser.parse_args()
+
+    file_name = args.file_name
+    df = reader(file_name)
+    data_lst = df.values.tolist()
 
     # Load fine-tuned model and vocabulary
     print("Loading model...")
     # model = BertWSD.from_pretrained(args.model_dir)
     # tokenizer = BertTokenizer.from_pretrained(args.model_dir)
 
-    # (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, 
-    # bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, 
-    # bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, 
-    # bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, 
-    # bert-base-german-dbmdz-uncased, bert-base-japanese, bert-base-japanese-whole-word-masking, bert-base-japanese-char, 
-    # bert-base-japanese-char-whole-word-masking, bert-base-finnish-cased-v1, bert-base-finnish-uncased-v1)
-
-    model = BertWSD.from_pretrained("bert-base-multilingual-cased")
-    tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
+    model = BertWSD.from_pretrained("bert-base-uncased") # bert-base-multilingual-cased
+    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
     # example input german: ich liebe [TGT] Oktoberfest [TGT] und Bier
     # example input italian: Era un [TGT] capo [TGT] dell'organizzazione

@@ -6,7 +6,7 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 [XL-WSD: An Extra-Large and Cross-Lingual Evaluation Framework
 for Word Sense Disambiguation](https://sapienzanlp.github.io/xl-wsd/assets/paper/xl-wsd-aaai2021.pdf)
 
-[XL-WSD Code/MOdels (s. Paper above "XL-WSD: An Extra-Large and Cross-Lingual Evaluation Framework
+[XL-WSD Code/Pretrained Models (s. Paper above "XL-WSD: An Extra-Large and Cross-Lingual Evaluation Framework
 for Word Sense Disambiguation")](https://sapienzanlp.github.io/xl-wsd/)
 
 [Adapting BERT for Word Sense Disambiguation with Gloss Selection Objective and Example Sentences](https://arxiv.org/abs/2009.11795)

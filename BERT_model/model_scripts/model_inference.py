@@ -97,8 +97,8 @@ def main():
     # model = BertWSD.from_pretrained(args.model_dir)
     # tokenizer = BertTokenizer.from_pretrained(args.model_dir)
 
-    model = BertWSD.from_pretrained("bert-base-uncased") # bert-base-multilingual-cased
-    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    model = BertWSD.from_pretrained("bert-base-multilingual-cased") # bert-base-multilingual-cased; bert-base-uncased; bert-large-uncased-whole-word-masking-finetuned-squad;
+    tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
 
     # example input german: ich liebe [TGT] Oktoberfest [TGT] und Bier
     # example input italian: Era un [TGT] capo [TGT] dell'organizzazione

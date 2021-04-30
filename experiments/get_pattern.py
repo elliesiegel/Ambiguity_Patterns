@@ -187,13 +187,17 @@ for lang_set in saved_languages:
                 ###### 
 
     print("1st level : ", node_lst)
+    node_num1 = len(node_lst)
+    print("number of nodes 1st level : ", node_num1)
 
 
 G = nx.Graph()
 
+num_edges = 0
 # SAVE further meanings of words in node_lst:
 for elem in node_lst:
     G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
+    num_edges += 1
     further_word = elem[0]
     if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
         for lang_set in saved_languages:
@@ -201,9 +205,11 @@ for elem in node_lst:
                 with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
                     further_word_senses = json.load(further_word_json)
                     for one_dict in further_word_senses:
+                        node_num1 += 1
                         further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        print(elem, " --> ", further_node)
+                        # print(elem, " --> ", further_node)
                         G.add_edges_from([(elem, further_node)])
+                        num_edges += 1
             except:
                 pass
     else:
@@ -213,12 +219,18 @@ for elem in node_lst:
                 with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
                     further_word_senses = json.load(further_word_json)
                     for one_dict in further_word_senses:
+                        node_num1 += 1
                         further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        print(elem, " --> ", further_node)
+                        # print(elem, " --> ", further_node)
                         G.add_edges_from([(elem, further_node)])
+                        num_edges += 1
             except:
                 pass
 
+print()
+print("Final numbers:")
+print("number nodes: ", node_num1)
+print("number edges: ", num_edges)
 
 nx.draw_networkx(G)
 plt.show()

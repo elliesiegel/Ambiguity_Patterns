@@ -1,4 +1,6 @@
 Loading model...
+
+
 >>  Your Oct. 6 editorial `` The Ill Homeless `` [TGT] referred [TGT] to research by us and six of our colleagues that was reported in the Sept. 8 issue of the Journal of the American Medical Association .  << 
  sentence glosses:  ['send or direct for treatment, information, or a decision', 'have as a meaning', 'seek information from', 'be relevant to', 'make reference to', 'use a name to designate', 'think of, regard, or classify under a subsuming principle or with a general group or in relation to another'] 
 

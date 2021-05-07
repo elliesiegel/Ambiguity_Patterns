@@ -19,6 +19,7 @@ wordSenses = glob.glob(path_to_input_jsons + "*_wordSenses.json")
 
 
 def get_wordsynsets(wordsynsets):
+    num_edges_wordsynsets = 0
     num_synset = 0
     # get synsets:
     for synsets_file in wordsynsets:
@@ -50,9 +51,14 @@ def get_wordsynsets(wordsynsets):
 
         all_synset_nodes = [(a, b) for idx, a in enumerate(node_set) for b in node_set[idx + 1:]]
         G.add_edges_from(all_synset_nodes)
+        num_edges_wordsynsets += G.number_of_edges()
+    
+    return num_edges_wordsynsets
 
 
 def get_wordSenses(wordSenses):
+    num_edges_wordSenses = 0
+    node_num_wordSenses = 0
     for sense_file in wordSenses:
         for node in all_word_nodes:
             word = node[0]
@@ -62,12 +68,28 @@ def get_wordSenses(wordSenses):
                     for one_dict in senses:
                         if one_dict["properties"]["language"] == "EN":# or "DE" or "ES":
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                            node_num_wordSenses += 1
                             # print(word, " --- >> ",lemma_and_lang)
                             G.add_edges_from([(word, lemma_and_lang)])
+                            num_edges_wordSenses += 1
+    
+    return node_num_wordSenses, num_edges_wordSenses
 
 
-get_wordsynsets(wordsynsets)
-get_wordSenses(wordSenses)
+num_edges_wordsynsets = get_wordsynsets(wordsynsets)
+node_num_wordSenses, num_edges_wordSenses = get_wordSenses(wordSenses)
+
+total_nodes = len(all_word_nodes) + node_num_wordSenses
+# print("len(all_word_nodes): ", len(all_word_nodes))
+# print("node_num_wordSenses: ", node_num_wordSenses)
+print("total number of nodes: ", total_nodes)
+print("total number of edges: ", num_edges_wordsynsets + num_edges_wordSenses)
+print()
+print("number of nodes that can be presented in the graph", G.number_of_nodes())
+print("number of edges that can be presented in the graph", G.number_of_edges())
+
 
 nx.draw_networkx(G)
 plt.show()
+
+# monolingual "page": total number of nodes:  32029; total number of edges:  52913

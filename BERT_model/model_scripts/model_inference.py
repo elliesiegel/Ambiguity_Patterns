@@ -73,12 +73,12 @@ def main():
     parser = argparse.ArgumentParser()
 
     # Required parameters
-    # parser.add_argument(
-    #     "model_dir",
-    #     default=None,
-    #     type=str,
-    #     help="Directory of pre-trained model."
-    # )
+    parser.add_argument(
+        "model_dir",
+        default=None,
+        type=str,
+        help="Directory of pre-trained model."
+    )
     parser.add_argument(
         "file_name",
         default=None,
@@ -94,11 +94,11 @@ def main():
 
     # Load fine-tuned model and vocabulary
     print("Loading model...")
-    # model = BertWSD.from_pretrained(args.model_dir)
-    # tokenizer = BertTokenizer.from_pretrained(args.model_dir)
+    model = BertWSD.from_pretrained(args.model_dir)
+    tokenizer = BertTokenizer.from_pretrained(args.model_dir)
 
-    model = BertWSD.from_pretrained("bert-base-multilingual-cased") # bert-base-multilingual-cased; bert-base-uncased; bert-large-uncased-whole-word-masking-finetuned-squad;
-    tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
+    # model = BertWSD.from_pretrained("bert-base-multilingual-cased") # bert-base-multilingual-cased; bert-base-uncased; bert-large-uncased-whole-word-masking-finetuned-squad;
+    # tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
 
     # example input german: ich liebe [TGT] Oktoberfest [TGT] und Bier
     # example input italian: Era un [TGT] capo [TGT] dell'organizzazione
@@ -117,6 +117,12 @@ def main():
                 [[f"{i+1}.", key, gloss, f"{score:.5f}"] for i, (key, gloss, score) in enumerate(predictions)],
                 headers=["No.", "Sense key", "Definition", "Score"])
             )
+
+            print("*"*30)
+            for i, (key, gloss, score) in enumerate(predictions):
+                if i+1 == 1:
+                    print("[SENT] "+ gloss +" [SENT]")
+            print("*"*30)
 
             print("-"*30)
             print()

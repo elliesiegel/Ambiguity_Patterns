@@ -6,7 +6,9 @@ import json
 
 
 data_csv = sys.argv[1]
+result_file = sys.argv[2]
 
+cnt_true = 0
 with open(data_csv) as csvfile:
     csv_reader = csv.reader(csvfile)
     next(csv_reader)
@@ -27,7 +29,23 @@ with open(data_csv) as csvfile:
             idx = idx.strip(",")
             idx = idx.strip(" ")
             idx = int(idx)
-            print(glosses_list[idx], idx) # TRUE labels for the words
+            cnt_true += 1
+            # print(glosses_list[idx], idx) # TRUE labels for the words
 
 # TODO save sentences from glosses_list[idx] in a list
 # compare with sentences from results
+
+
+cnt_preds = 0
+with open(result_file) as result_file:
+    result_file_reader = result_file.readlines()
+    for sent_symbols in result_file_reader:
+        found_sentence = re.search(r"\[SENT\](.*)\[SENT\]", sent_symbols)
+        if found_sentence is not None:
+            found_sentence = found_sentence.group(1).strip()
+            found_sentence = re.sub("[SENT] ", "", found_sentence)
+            print(found_sentence)
+            cnt_preds += 1
+
+print(cnt_true)
+print(cnt_preds)

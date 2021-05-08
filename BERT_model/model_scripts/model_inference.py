@@ -121,11 +121,13 @@ def main():
             print("*"*30)
             for i, (key, gloss, score) in enumerate(predictions):
                 if i+1 == 1:
-                    print("[SENT] "+ gloss +" [SENT]")
+                    print("[SENT_1]"+ gloss +"[SENT_1]")
             print("*"*30)
 
             print("-"*30)
             print()
+        else:
+            print("[ No Prediction for this sentence and this word ]")
 
 if __name__ == '__main__':
     main()

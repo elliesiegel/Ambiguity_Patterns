@@ -3,3 +3,13 @@ embed_model
 __pycache__
 figures_graphs
 results_on_mBERT
+images_patterns
+../bert_results.txt
+../categories_falses.csv
+../categories_trues.csv
+../categories_trues_and_falses.csv
+categories_trues.csv
+../results.csv
+../results_mbert.txt
+JSON_data_comparison/
+crawler-vars/

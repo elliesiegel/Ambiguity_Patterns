@@ -6,6 +6,12 @@ from pathlib import Path
 import networkx as nx
 import matplotlib.pyplot as plt
 
+'''
+get number nodes/edges
+construct the graph
+
+example call: python3 get_pattern_synsets.py JSON_data/recrimination/
+'''
 
 path_to_input_jsons = sys.argv[1]
 # json_folder = Path(path_to_input_jsons).rglob('*.json')
@@ -33,7 +39,7 @@ def get_wordsynsets(wordsynsets):
                 # print(one_dict)
                 # print()
                 try:
-                    if one_dict["properties"]["language"] == "EN":# or "DE" or "ES":
+                    if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
                         lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         node_set.add(lemma_and_lang)
                         # G.add_node(lemma_and_lang, role=role)
@@ -44,10 +50,10 @@ def get_wordsynsets(wordsynsets):
                         # find out weather there are connections over ambiguous words to
                         # other synset groups (cliques)
 
-        node_set = list(node_set)   # per synset clique
+        node_set = list(node_set)   # per synset clique / per file
         # All possible pairs
         for node in node_set:
-            all_word_nodes.append(node)
+            all_word_nodes.append(node) # from all documents
 
         all_synset_nodes = [(a, b) for idx, a in enumerate(node_set) for b in node_set[idx + 1:]]
         G.add_edges_from(all_synset_nodes)
@@ -66,7 +72,7 @@ def get_wordSenses(wordSenses):
                 with open(sense_file) as sense_file_reader:
                     senses = json.load(sense_file_reader)
                     for one_dict in senses:
-                        if one_dict["properties"]["language"] == "EN":# or "DE" or "ES":
+                        if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                             node_num_wordSenses += 1
                             # print(word, " --- >> ",lemma_and_lang)
@@ -89,7 +95,7 @@ print("number of nodes that can be presented in the graph", G.number_of_nodes())
 print("number of edges that can be presented in the graph", G.number_of_edges())
 
 
-nx.draw_networkx(G)
-plt.show()
+# nx.draw_networkx(G)
+# plt.show()
 
 # monolingual "page": total number of nodes:  32029; total number of edges:  52913

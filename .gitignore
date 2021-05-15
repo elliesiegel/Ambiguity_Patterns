@@ -4,3 +4,11 @@ BERT_model/script/utils/__pycache__/wordnet.cpython-37.pyc
 Input_Data
 pretrained_WSD_models
 Cytoscape
+*.swp
+bert_results.txt
+categories_falses.csv
+categories_trues.csv
+categories_trues_and_falses.csv
+results.csv
+results_mbert.txt
+

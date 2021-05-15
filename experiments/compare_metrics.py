@@ -6,6 +6,9 @@ import json
 import pandas as pd
 
 # example call: python3 compare_metrics.py Input_Data/semeval2013.csv results_on_mBERT/inferred_on_semeval_test_2013/multilingual_BERT.txt
+'''
+calculates accuracy for the overall prediction
+'''
 
 data_csv = sys.argv[1]
 result_file = sys.argv[2]

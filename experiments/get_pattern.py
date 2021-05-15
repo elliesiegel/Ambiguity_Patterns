@@ -6,14 +6,14 @@ import argparse
 import itertools
 import urllib.request
 
-import networkx as nx
-import matplotlib.pyplot as plt
+# import networkx as nx
+# import matplotlib.pyplot as plt
 
 '''
 - collects word information/synsets from BabelNet
-- creates patterns
+- optionally: creates patterns (as data is collected)
 
-example call: python3 get_pattern.py knot JSON_data/knot_en/
+example call: python3 get_pattern.py recrimination JSON_data/recrimination/
 '''
 
 parser = argparse.ArgumentParser()
@@ -34,15 +34,17 @@ parser.add_argument(
 
 parser.add_argument(
                     "--targetLang_searchLang",  # languages we want to gather information from
-                    default="DE_ES_FR", # CS_IT_NN   RU_UK_PL
+                    default="DE_ES_FR",  # "DE_ES_FR", "CS_IT_NN", "RU_UK_PL"
                     type=str,
                     help="languages for search/target (the BabelNet API is restricted to max 3 languages)."
                     )
 
 parser.add_argument(
                     "--languages",  # languages to open files from
-                    nargs='+',
-                    default=["DE_ES_FR", "CS_IT_NN", "RU_UK_PL"],
+                    default="DE_ES_FR",  # "DE_ES_FR", "CS_IT_NN", "RU_UK_PL"
+                    type=str,
+                    # nargs='+',
+                    # default=["DE_ES_FR", "CS_IT_NN", "RU_UK_PL"],
                     help="languages for reading/opening saved BabelNet data."
                     )
 # indo-europ.: DE, FR, ES, IT, EN, CS, NN, NO, RU, UK, PL
@@ -50,7 +52,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-saved_languages = args.languages
+saved_languages = [args.languages]
 print(saved_languages, "**********************")
 
 # must be in the saved_languages list
@@ -191,13 +193,13 @@ for lang_set in saved_languages:
     print("number of nodes 1st level : ", node_num1)
 
 
-G = nx.Graph()
+# G = nx.Graph()
 
-num_edges = 0
+# num_edges = 0
 # SAVE further meanings of words in node_lst:
 for elem in node_lst:
-    G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
-    num_edges += 1
+    # G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
+    # num_edges += 1
     further_word = elem[0]
     if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
         for lang_set in saved_languages:
@@ -208,8 +210,8 @@ for elem in node_lst:
                         node_num1 += 1
                         further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         # print(elem, " --> ", further_node)
-                        G.add_edges_from([(elem, further_node)])
-                        num_edges += 1
+                        # G.add_edges_from([(elem, further_node)])
+                        # num_edges += 1
             except:
                 pass
     else:
@@ -222,15 +224,15 @@ for elem in node_lst:
                         node_num1 += 1
                         further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         # print(elem, " --> ", further_node)
-                        G.add_edges_from([(elem, further_node)])
-                        num_edges += 1
+                        # G.add_edges_from([(elem, further_node)])
+                        # num_edges += 1
             except:
                 pass
 
-print()
-print("Final numbers:")
-print("number nodes: ", node_num1)
-print("number edges: ", num_edges)
+# print()
+# print("Final numbers:")
+# print("number nodes: ", node_num1)
+# print("number edges: ", num_edges)
 
-nx.draw_networkx(G)
-plt.show()
+# nx.draw_networkx(G)
+# plt.show()

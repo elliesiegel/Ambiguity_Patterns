@@ -13,6 +13,7 @@ example call: python3 get_sense_graph.py JSON_data_comparison/both_ture/climate/
 '''
 
 path_to_input_jsons = sys.argv[1]
+path_to_save_img = sys.argv[2]
 
 all_word_nodes = []
 wordsynsets = glob.glob(path_to_input_jsons + "*_wordsynsets.json")
@@ -59,18 +60,18 @@ def get_wordsynsets(wordsynsets):
         # num_edges_wordsynsets += G.number_of_edges()
     
     all_combis = list(itertools.combinations(saved_cliques, 2))
-    for elem in all_combis:
-        elem1 = elem[0]
-        elem2 = elem[1]
-        if elem1 != elem2:
-            for word1 in elem1:
-                for word2 in elem2:
+    for pair in all_combis:
+        pair1 = pair[0]
+        pair2 = pair[1]
+        if pair1 != pair2:
+            for word1 in pair1:
+                for word2 in pair2:
                     if word1 == word2:
                         # print(word1, word2)
-                        # print(elem1[0], " ---- ", elem2[0])
-                        G.add_edges_from([(elem1[0], elem2[0])])
-                        # print(type(elem1[0]), type(elem2[0]))
-    
+                        # print(pair1[0], " ---- ", pair2[0])
+                        G.add_edges_from([(pair1[0], pair2[0])])
+                        # print(type(pair1[0]), type(pair2[0]))
+
     return num_synset
 
 
@@ -79,4 +80,12 @@ print("total number cliques: ", synsets)
 
 c = CircosPlot(graph=G)
 c.draw()
-plt.show()
+# plt.show()
+plt.savefig(path_to_save_img)
+
+
+# pair example:
+# (
+#     ('26', 'atmosfera_IT', 'clima_ES', 'clima_IT', 'climat_FR', 'climate_EN', 'convention-cadre_FR', 'environnement_FR', 'estado_de_ánimo_ES', 'humeur_FR', 'humor_ES', 'mode_FR', 'mood_EN'), 
+#     ('27', "Climat_de_l'Allemagne_FR", 'Deutschlands_Klima_DE', 'German_climate_EN', "Germany's_climate_EN", 'Germany_climate_EN', 'Klima_(Bundesrepublik_Deutschland)_DE', 'Klima_(Deutschland)_DE', 'Klima_(Deutschlands)_DE', 'Klima_Deutschlands_DE', 'Klima_in_Deutschland_DE', 'Klima_in_der_Bundesrepublik_Deutschland_DE', 'Klima_von_Deutschland_DE', 'Klima_von_der_Bundesrepublik_Deutschland_DE', 'climat_(Allemagne)_FR', 'climat_en_Allemagne_FR', 'climate_(Germany)_EN', 'climate_in_Germany_EN', 'climate_of_Germany_EN')
+# )

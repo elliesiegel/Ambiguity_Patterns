@@ -78,10 +78,12 @@ print("initial word: ", "> ", input_word, " <")
 print("*"*10)
 
 
-# TODO: expand / change "searchLang=EN" to argparse arg
+# TODO: download only once! -- del targetLang_searchLang
+# data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json" into
+# --> data_dir + input_word + "_synset_ids.json"
 def check_files_SynsetIds_exist(data_dir, input_word):
     # if the id file does not exist, create one:
-    if os.path.isfile(data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json") == False:
+    if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
 
         url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
         url = url.replace("[word]", input_word)
@@ -89,8 +91,8 @@ def check_files_SynsetIds_exist(data_dir, input_word):
         data = json.load(web_get_synset_ids) 
 
         # SAVE data in json if the file with the ids does not exist:
-        out_file = open(data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json", "w") 
-        json.dump(data, out_file, indent = 6) 
+        out_file = open(data_dir + input_word + "_synset_ids.json", "w")
+        json.dump(data, out_file, indent = 6)
     
         return True
         
@@ -146,7 +148,8 @@ print()
 
 node_lst = []
 for lang_set in saved_languages:
-    with open(data_dir + input_word + "_" + lang_set + "_synset_ids.json", "r") as synsets_id_json_file:
+    # TODO: data_dir + input_word + "_synset_ids.json"
+    with open(data_dir + input_word + "_synset_ids.json", "r") as synsets_id_json_file:
         synset_ids = json.load(synsets_id_json_file)
         for elem in synset_ids:
             idx = elem["id"]

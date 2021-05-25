@@ -11,4 +11,5 @@ categories_trues.csv
 categories_trues_and_falses.csv
 results.csv
 results_mbert.txt
-
+RESULTS_figure_CSV/
+get_pattern_synsets-output/

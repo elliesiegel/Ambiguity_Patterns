@@ -13,3 +13,6 @@ categories_trues.csv
 ../results_mbert.txt
 JSON_data_comparison/
 crawler-vars/
+crawler-vars-falses/
+get_pattern_synsets-output_falses/
+get_pattern_synsets-output_trues/

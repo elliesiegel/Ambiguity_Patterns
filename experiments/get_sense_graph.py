@@ -24,6 +24,7 @@ G = nx.Graph()
 def get_wordsynsets(wordsynsets):
     saved_cliques = []
     num_synset = 0
+    num_edges_synsets = 0
     # get synsets:
     for synsets_file in wordsynsets:
         node_set = set() # per synset a new one
@@ -68,15 +69,19 @@ def get_wordsynsets(wordsynsets):
                 for word2 in pair2:
                     if word1 == word2:
                         # print(word1, word2)
-                        # print(pair1[0], " ---- ", pair2[0])
+                        # print(pair1, " ---- ", pair2)
+                        # print()
+                        # print("#"*20)
+                        num_edges_synsets += 1
                         G.add_edges_from([(pair1[0], pair2[0])])
                         # print(type(pair1[0]), type(pair2[0]))
 
-    return num_synset
+    return num_synset, num_edges_synsets
 
 
-synsets = get_wordsynsets(wordsynsets)
-print("total number cliques: ", synsets)
+synsets, synset_edges  = get_wordsynsets(wordsynsets)
+print("total number cliques: ", synsets)            # TODO: write as third column
+print("total number clique-edges: ", synset_edges)  # TODO: write as fourth column
 
 c = CircosPlot(graph=G)
 c.draw()

@@ -13,3 +13,7 @@ results.csv
 results_mbert.txt
 RESULTS_figure_CSV/
 get_pattern_synsets-output/
+page_large_english_results.txt
+get_sense_graph_output_falses/
+get_sense_graph_output_trues/
+*.png

@@ -46,12 +46,16 @@ do
 
 	# STEP 3: write number of nodes and edges to csv per word
 	python3 get_pattern_synsets.py JSON_data_comparison/both_ture/$WORD/ > get_pattern_synsets-output_trues/$WORD
-	NODES=$(grep total get_pattern_synsets-output_trues/$WORD | grep nodes | grep -o [0-9]*)
-	EDGES=$(grep total get_pattern_synsets-output_trues/$WORD | grep edges | grep -o [0-9]*)
-	echo "$WORD,$NODES,$EDGES" >> RESULTS_figure_CSV/all-trues-word-nodes-edges.csv
 
 	# STEP 4: create image per word
-	python3 get_sense_graph.py JSON_data_comparison/both_ture/$WORD/ RESULTS_figure_CSV/$WORD
+	python3 get_sense_graph.py JSON_data_comparison/both_ture/$WORD/ RESULTS_figure_CSV/trues_multilingual/$WORD > get_sense_graph_output_trues/$WORD
+
+	# STEP 5: create CSVs
+	NODES=$(grep total get_pattern_synsets-output_trues/$WORD | grep nodes | grep -o [0-9]*)
+	EDGES=$(grep total get_pattern_synsets-output_trues/$WORD | grep edges | grep -o [0-9]*)
+	NUM_CLIQUES=$(grep total get_sense_graph_output_trues/$WORD | grep cliques | grep -o [0-9]*)
+	CLIQUE_EDGES=$(grep total get_sense_graph_output_trues/$WORD | grep clique-edges | grep -o [0-9]*)
+	echo "$WORD,$NODES,$EDGES,$NUM_CLIQUES,$CLIQUE_EDGES" >> RESULTS_figure_CSV/all-trues-word-nodes-edges.csv
 
 	CURR_LANGS_ID=1
 	CURR_WORD_ID=$(( $CURR_WORD_ID + 1 ))

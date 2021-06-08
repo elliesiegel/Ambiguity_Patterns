@@ -84,7 +84,7 @@ print()
 totals_ignored_no_preds = cnt_all_preds - cnt_no_preds
 print("ignore no predictions / total predictions: ", totals_ignored_no_preds)
 print("correct: ", cnt_corrects)
-print("false: ", cnt_falses)
+print("false: ", cnt_falses - cnt_no_preds)
 print()
 # accuracy = (correctly predicted class / total testing class) × 100%
 print("accuracy: ", (cnt_corrects / totals_ignored_no_preds)*100, " %")
@@ -93,13 +93,12 @@ print("accuracy: ", (cnt_corrects / totals_ignored_no_preds)*100, " %")
 # Datatset SE13  (semeval2013):
 #
 # bert_large-augmented-batch_size\=128-lr\=2e-5-max_gloss\=6:
-#
 # no predictions:  128
 # all preds:  1644
 
 # ignore no predictions / total predictions:  1516
 # correct:  916
-# false:  728
+# false:  600
 
 # accuracy:  60.4221635883905  %
 
@@ -110,9 +109,10 @@ print("accuracy: ", (cnt_corrects / totals_ignored_no_preds)*100, " %")
 
 # ignore no predictions / total predictions:  1516
 # correct:  861
-# false:  783
+# false:  655
 
 # accuracy:  56.79419525065963  %
+
 
 # mBERT:
 # no predictions:  128
@@ -120,6 +120,17 @@ print("accuracy: ", (cnt_corrects / totals_ignored_no_preds)*100, " %")
 
 # ignore no predictions / total predictions:  1516
 # correct:  506
-# false:  1138
+# false:  1010
 
 # accuracy:  33.37730870712401  %
+
+
+# mBERT fine tuned on WSD (training data: semcor-max_num_gloss=6-augmented.csv)
+# no predictions:  128
+# all preds:  1644
+
+# ignore no predictions / total predictions:  1516
+# correct:  700
+# false:  816
+
+# accuracy:  46.17414248021108  %

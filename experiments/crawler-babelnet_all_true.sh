@@ -15,7 +15,8 @@ fi
 for WORD in $(sed 's/,.*//g' "$WORD_CSV" | tr " " _ | sort -u | tail -n +$(( 1 + $CURR_WORD_ID )))
 do
 	echo "+++++++++ next word at id $CURR_WORD_ID: $WORD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	for LANG in $(echo DE_ES_FR CS_IT_NN RU_UK_PL | sed 's/ /\n/g' | tail -n +$(( 0 + $CURR_LANGS_ID )))
+	#for LANG in $(echo DE_ES_FR CS_IT_NN RU_UK_PL | sed 's/ /\n/g' | tail -n +$(( 0 + $CURR_LANGS_ID )))
+	for LANG in $(echo DE_ES_FR )
 	do
 		echo "+++++++++ next lang: $LANG ++++++++++"
 		if [ "$CONTINUE" == "continue" ]

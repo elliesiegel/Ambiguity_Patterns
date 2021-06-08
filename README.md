@@ -1,6 +1,23 @@
 # Ambiguity_Patterns
 Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Ambiguity Detection with multilingual BERT** / Transformer architectures and pretrained models.  Data used in this project: https://babelnet.org/
 
+
+# Compute Accuracy of pre-trained models:
+
+*pip install -r requirements.txt*
+
+change to the branch: *count_nodes_edges*
+
+go in the directory: experiments, *Ambiguity_Patterns/experiments*
+
+start: python3 compare_metrics.py ../Input_Data/semeval2013.csv ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/bert_BASE.txt
+
+or:
+
+python3 compare_metrics.py ../Input_Data/semeval2013.csv ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/bert_large-augmented-batch_size\=128-lr\=2e-5-max_gloss\=6_marked.txt
+
+
+
 **References**:
 
 [How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)

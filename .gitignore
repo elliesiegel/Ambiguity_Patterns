@@ -17,3 +17,7 @@ page_large_english_results.txt
 get_sense_graph_output_falses/
 get_sense_graph_output_trues/
 *.png
+../BERT_model/model_scripts/output_dir/
+../BERT_model/model_scripts/runs/
+../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/mbert_finetuned_chkpnt24000.txt
+list-of-files-before.txt

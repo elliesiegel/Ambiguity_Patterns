@@ -14,9 +14,20 @@ fi
 
 for WORD in $(sed 's/,.*//g' "$WORD_CSV" | tr " " _ | sort -u | tail -n +$(( 1 + $CURR_WORD_ID )))
 do
+    # Skip allready downloaded words
+	if test -d JSON_data_comparison/both_ture/$WORD
+	then
+		# Making sure not to skip if we want to continue loading files for a word.
+		if [ "$CONTINUE" != "continue" ]
+		then
+			CURR_WORD_ID=$(( $CURR_WORD_ID + 1 ))
+			echo "skipping $WORD (already downloaded)"
+			continue
+		fi
+	fi
 	echo "+++++++++ next word at id $CURR_WORD_ID: $WORD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-	#for LANG in $(echo DE_ES_FR CS_IT_NN RU_UK_PL | sed 's/ /\n/g' | tail -n +$(( 0 + $CURR_LANGS_ID )))
-	for LANG in $(echo DE_ES_FR )
+	for LANG in $(echo DE_ES_FR CS_IT_NN RU_UK_PL | sed 's/ /\n/g' | tail -n +$(( 0 + $CURR_LANGS_ID )))
+	#for LANG in $(echo DE_ES_FR )
 	do
 		echo "+++++++++ next lang: $LANG ++++++++++"
 		if [ "$CONTINUE" == "continue" ]

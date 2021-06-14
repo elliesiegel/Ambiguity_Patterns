@@ -3,6 +3,9 @@ import sys
 import re
 
 '''
+generate result_bert.txt with create_preds_file.py
+example call: python3 compare_metrics_wordwise.py ../Input_Data/semeval2013.csv ../result_bert.txt ../results_finetuned_mbert.txt results_bert_fine-tuned-mbert.csv
+
 creates a csv with header = ["ambig word", "pred bert", "pred mbert", "true label"]
 '''
 
@@ -109,9 +112,9 @@ mbert_words, mbert_preds = get_predictions(path_to_mbert)           # pred mbert
 
 word_sense_lst = list(zip(*[all_words_list, bert_preds, mbert_preds, all_meanings_true]))
 
-header = ["ambig word", "pred bert", "pred mbert", "true label"]
+header = ["ambig word", "pred bert", "pred finetuned mbert", "true label"]
 
-with open("results.csv", 'w', encoding='UTF8') as f:
+with open(path_out_csv, 'w', encoding='UTF8') as f:
     writer = csv.writer(f)
     writer.writerow(header)
 

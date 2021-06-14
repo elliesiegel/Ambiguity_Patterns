@@ -14,6 +14,7 @@ example call: python3 get_pattern_synsets.py JSON_data/recrimination/
 '''
 
 path_to_input_jsons = sys.argv[1]
+# path_to_save_word_graph_img = sys.argv[2]
 # json_folder = Path(path_to_input_jsons).rglob('*.json')
 # files = [f_folder for f_folder in json_folder]
 
@@ -39,10 +40,10 @@ def get_wordsynsets(wordsynsets):
                 # print(one_dict)
                 # print()
                 try:
-                    if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
-                        lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        node_set.add(lemma_and_lang)
-                        # G.add_node(lemma_and_lang, role=role)
+                    # if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
+                    lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                    node_set.add(lemma_and_lang)
+                    # G.add_node(lemma_and_lang, role=role)
                 except:
                     pass
         # print("----------------------------")
@@ -72,12 +73,12 @@ def get_wordSenses(wordSenses):
                 with open(sense_file) as sense_file_reader:
                     senses = json.load(sense_file_reader)
                     for one_dict in senses:
-                        if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
-                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                            node_num_wordSenses += 1
-                            # print(word, " --- >> ",lemma_and_lang)
-                            G.add_edges_from([(word, lemma_and_lang)])
-                            num_edges_wordSenses += 1
+                        # if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
+                        lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
+                        node_num_wordSenses += 1
+                        # print(word, " --- >> ",lemma_and_lang)
+                        G.add_edges_from([(word, lemma_and_lang)])
+                        num_edges_wordSenses += 1
     
     return node_num_wordSenses, num_edges_wordSenses
 
@@ -95,7 +96,8 @@ print("number of nodes that can be presented in the graph", G.number_of_nodes())
 print("number of edges that can be presented in the graph", G.number_of_edges())
 
 
-# nx.draw_networkx(G)
+nx.draw_networkx(G)
 # plt.show()
+# plt.savefig(path_to_save_word_graph_img)
 
 # monolingual "page": total number of nodes:  32029; total number of edges:  52913

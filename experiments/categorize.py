@@ -11,8 +11,9 @@ false, true
 '''
 
 data_csv = sys.argv[1]
+output_csv = sys.argv[2]
 
-with open(data_csv) as csvfile, open("categories.csv", 'w', encoding='UTF8') as cats:
+with open(data_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as cats:
 
     writer = csv.writer(cats)
     header = ["ambig word", "pred bert", "pred mbert"] #, "num nodes", "num edges", "pattern"]
@@ -26,9 +27,11 @@ with open(data_csv) as csvfile, open("categories.csv", 'w', encoding='UTF8') as 
         pred_mbert = row[2]
         true_label = row[3]
 
-        if pred_bert == true_label and pred_mbert == true_label:
-            writer.writerow([ambig_word, "true", "true"])  
+        # if pred_bert == true_label and pred_mbert == true_label:
+        #     writer.writerow([ambig_word, "true", "true"])  
 
-        if pred_bert != true_label and pred_mbert != true_label:
-            writer.writerow([ambig_word, "false", "false"])
+        # if pred_bert != true_label and pred_mbert != true_label:
+        #     writer.writerow([ambig_word, "false", "false"])
         
+        if pred_bert != true_label and pred_mbert == true_label:
+            writer.writerow([ambig_word, "false", "true"])

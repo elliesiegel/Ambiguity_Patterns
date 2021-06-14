@@ -36,7 +36,8 @@ def get_wordsynsets(wordsynsets):
 
             for one_dict in word_synsets["senses"]:
                 try:
-                    if one_dict["properties"]["language"] == "EN" or "DE" or "ES" or "FR":
+                    # if one_dict["properties"]["language"] == "EN": # or "DE" or "ES" or "FR":
+                    if one_dict["properties"]["language"] in ['EN','RU', 'IT', 'DE', 'UK', 'NO', 'NN', 'CS', 'PL', 'TR', 'ES', 'FR']:
                         # lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                         lemma_and_lang = (one_dict["properties"]["fullLemma"] + "_" +one_dict["properties"]["language"])
                         node_set.add(lemma_and_lang)
@@ -44,7 +45,7 @@ def get_wordsynsets(wordsynsets):
                 except:
                     pass
         # print("----------------------------")
-        # print(node_set) # look for further senses of the current sense word - 
+        print(node_set) # look for further senses of the current sense word - 
                         # find out weather there are connections over ambiguous words to
                         # other synset groups (cliques)
         node_set = sorted(node_set)
@@ -80,8 +81,9 @@ def get_wordsynsets(wordsynsets):
 
 
 synsets, synset_edges  = get_wordsynsets(wordsynsets)
-print("total number cliques: ", synsets)            # TODO: write as third column
-print("total number clique-edges: ", synset_edges)  # TODO: write as fourth column
+print("total number cliques: ", synsets)
+print("total number clique-edges: ", synset_edges)  # total clique edges from word in cl 1 to word in cl2
+print("number of edges btw cliques: ", G.number_of_edges())
 
 c = CircosPlot(graph=G)
 c.draw()

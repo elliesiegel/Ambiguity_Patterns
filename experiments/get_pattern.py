@@ -5,6 +5,32 @@ import os.path
 import argparse
 import itertools
 import urllib.request
+import pickle
+from pathlib import Path
+
+
+class ApiProxy():
+
+    def __init__(self, dumpfile_path):
+        self.dumpfile_path = dumpfile_path
+        if Path(self.dumpfile_path).is_file():
+            with open(self.dumpfile_path, 'rb') as f:
+                self.query_dict = pickle.load(f)
+        else:
+            self.query_dict = {}
+
+    def query_for_json(self, url):
+        if url not in self.query_dict:
+            web_get_synset_ids = urllib.request.urlopen(url)
+            self.query_dict[url]=json.load(web_get_synset_ids)
+        return self.query_dict[url]
+
+    def query_dump(self):
+        with open(self.dumpfile_path, 'wb') as f:
+            pickle.dump(self.query_dict, f)
+        print("Stored for BabelNet Queries in ", self.dumpfile_path)
+
+api_proxy=ApiProxy("babel_query.dump")
 
 # import networkx as nx
 # import matplotlib.pyplot as plt
@@ -33,6 +59,13 @@ parser.add_argument(
                     )
 
 parser.add_argument(
+                    "api_key",
+                    default="",
+                    type=str,
+                    help="access api key for babelnet"
+                    )
+
+parser.add_argument(
                     "--targetLang_searchLang",  # languages we want to gather information from
                     default="DE_ES_FR",  # "DE_ES_FR", "CS_IT_NN", "RU_UK_PL"
                     type=str,
@@ -50,6 +83,7 @@ parser.add_argument(
 # indo-europ.: DE, FR, ES, IT, EN, CS, NN, NO, RU, UK, PL
 # others: TR
 
+
 args = parser.parse_args()
 
 saved_languages = [args.languages]
@@ -61,6 +95,8 @@ lang_lst = targetLang_searchLang.split("_")
 lan_1 = lang_lst[0]
 lan_2 = lang_lst[1]
 lan_3 = lang_lst[2]
+
+babel_net_api_key = args.api_key
 
 # give the data directory with json files in it
 # data_dir = sys.argv[2]
@@ -85,10 +121,12 @@ def check_files_SynsetIds_exist(data_dir, input_word):
     # if the id file does not exist, create one:
     if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
 
-        url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
+        url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=[babel_net_api_key]"
         url = url.replace("[word]", input_word)
-        web_get_synset_ids = urllib.request.urlopen(url)
-        data = json.load(web_get_synset_ids) 
+        url = url.replace("[babel_net_api_key]", babel_net_api_key)
+        data = api_proxy.query_for_json(url)
+        # web_get_synset_ids = urllib.request.urlopen(url)
+        # data = json.load(web_get_synset_ids) 
 
         # SAVE data in json if the file with the ids does not exist:
         out_file = open(data_dir + input_word + "_synset_ids.json", "w")
@@ -101,14 +139,16 @@ def check_files_getSynset_exist(idx, lan_1, lan_2, lan_3):
         # sometimes no senses are given, hence error "IndexError: list index out of range" occurs, so catching
         try:
             # id=bn:00091387v --> id=extracted_id
-            url_for_lemmas = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=[lan_1]&targetLang=[lan_2]&targetLang=[lan_3]&targetLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
+            url_for_lemmas = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=[lan_1]&targetLang=[lan_2]&targetLang=[lan_3]&targetLang=EN&key=[babel_net_api_key]"
             url_for_lemmas = url_for_lemmas.replace("[synset_id]", idx)
             url_for_lemmas = url_for_lemmas.replace("[lan_1]", lan_1)
             url_for_lemmas = url_for_lemmas.replace("[lan_2]", lan_2)
             url_for_lemmas = url_for_lemmas.replace("[lan_3]", lan_3)
+            url_for_lemmas = url_for_lemmas.replace("[babel_net_api_key]", babel_net_api_key)
 
-            web_get_synsets = urllib.request.urlopen(url_for_lemmas)
-            data_synsets = json.load(web_get_synsets)
+            data_synsets = api_proxy.query_for_json(url_for_lemmas)
+            # web_get_synsets = urllib.request.urlopen(url_for_lemmas)
+            # data_synsets = json.load(web_get_synsets)
             out_file = open(data_dir + idx +"_"+ input_word + "_" + targetLang_searchLang + "_wordsynsets.json", "w") 
             json.dump(data_synsets, out_file, indent = 6) 
         except:
@@ -122,14 +162,16 @@ def check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3): # for furthe
         # CALL if files do not exist else give the files in
         try:
             # [word] may have non ascii chars
-            url = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=[lan_1]&searchLang=[lan_2]&searchLang=[lan_3]&searchLang=EN&key=299a9265-9746-4b40-a13f-b1cb0a7d3f1d"
+            url = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=[lan_1]&searchLang=[lan_2]&searchLang=[lan_3]&searchLang=EN&key=[babel_net_api_key]"
             url = url.replace("[word]", further_word)
             url = url.replace("[lan_1]", lan_1)
             url = url.replace("[lan_2]", lan_2)
             url = url.replace("[lan_3]", lan_3)
+            url = url.replace("[babel_net_api_key]", babel_net_api_key)
 
-            web_get_synset_ids = urllib.request.urlopen(url)
-            further_word_data = json.load(web_get_synset_ids)
+            further_word_data = api_proxy.query_for_json(url)
+            # web_get_synset_ids = urllib.request.urlopen(url)
+            # further_word_data = json.load(web_get_synset_ids)
             out_file = open(data_dir + further_word + "_" + targetLang_searchLang + "_wordSenses.json", "w") 
             json.dump(further_word_data, out_file, indent = 6) 
         except:
@@ -231,6 +273,8 @@ for elem in node_lst:
                         # num_edges += 1
             except:
                 pass
+
+api_proxy.query_dump()
 
 # print()
 # print("Final numbers:")

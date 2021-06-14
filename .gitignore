@@ -21,3 +21,8 @@ get_sense_graph_output_trues/
 ../BERT_model/model_scripts/runs/
 ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/mbert_finetuned_chkpnt24000.txt
 list-of-files-before.txt
+*.txt
+*.csv
+BERT_model/model_scripts/runs/
+BERT_model/model_scripts/output_dir/
+experiments/babel_query.dump

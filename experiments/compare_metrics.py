@@ -133,4 +133,5 @@ print("accuracy: ", (cnt_corrects / totals_ignored_no_preds)*100, " %")
 # correct:  700
 # false:  816
 
-# accuracy:  46.17414248021108  %
+# accuracy, 1 epoch:  46.17414248021108  %
+# acc, 2 epochs: 50.065963060686016 % 

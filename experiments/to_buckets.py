@@ -61,6 +61,11 @@ print("#"*20)
 # bucket_2 ###########
 # only over nodes
 # ('temperature', 678597, true) - ('Appeal', 674733, false)
+# Appeal:   variance btw. words in cliques 962.4272727272726
+#           variance btw. edges out. from cliques  4108.0609756097565
+# temperature:  variance btw. words in cliques 1286.076923076923
+#               variance btw. edges out. from cliques  3769.528571428572
+
 
 # nodes and edges:
 # ('advantage', 419214, 479607, false) - ('bacteria', 405885, 525620, true)
@@ -107,3 +112,14 @@ print("#"*20)
 # new:
 # ('advantage', 30, 852, false) - ('applause', 27, 957, true)
 # ('challenge', 138, 6531, false) - ('attitude', 108, 6792, true)
+
+# ('Central_America', 12, 543, false) - ('biochemistry', 12, 585, true)
+# ('Code_of_Conduct', 12, 426, false) - ('biochemistry', 12, 585, true)
+# ('fault_lines', 12, 243, false) - ('biochemistry', 12, 585, true)
+# ('fault_lines', 12, 243, false) - ('backing', 15, 282, true)
+
+# ('circumstances', 18, 579, false) - ('bacteria', 18, 864, true)
+# ('circumstances', 18, 579, false) - ('arsenic', 18, 912, true)
+# ('advantage', 30, 852, false) - ('applause', 27, 957, true)
+# ('fault_lines', 12, 243, false) - ('competitor', 15, 228, true)
+# ('club', 117, 10215, false) - ('attitude', 108, 6792, true)

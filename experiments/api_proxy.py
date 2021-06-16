@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import pickle
+import re
 from pathlib import Path
 
 
@@ -15,15 +16,17 @@ class ApiProxy():
             self.query_dict = {}
 
     def query_for_json(self, url):
-        if url not in self.query_dict:
+        # !!! the re.sub() below reqires reqest URLs not to include argument names ending in "key" !!!
+        keylessurl=re.sub('key=[^&]*','key=API_KEY',url)
+        if keylessurl not in self.query_dict:
             web_get_synset_ids = urllib.request.urlopen(url)
             json_reply=json.load(web_get_synset_ids)
-            if "Your key is not valid or the daily requests limit has been reached." in json_reply:
-                print("NO DUMP DUE TO: Your key is not valid or the daily requests limit has been reached.")
-                return json_reply
-            else:
-                self.query_dict[url]=json_reply
-        return self.query_dict[url]
+            if 'message' in json_reply:
+                if "Your key is not valid or the daily requests limit has been reached." in json_reply['message']:
+                    print("NO DUMP DUE TO: Your key is not valid or the daily requests limit has been reached.")
+                    return json_reply
+            self.query_dict[keylessurl]=json_reply
+        return self.query_dict[keylessurl]
 
     def query_dump(self):
         with open(self.dumpfile_path, 'wb') as f:
@@ -33,8 +36,8 @@ class ApiProxy():
 
 
 # Test of ApiProxy class
-# import sys
+#import sys
 
-# proxy=ApiProxy('test.dump')
-# print(proxy.query_for_json(sys.argv[1]))
-# proxy.query_dump()
+#proxy=ApiProxy('test.dump')
+#print(proxy.query_for_json(sys.argv[1]))
+#proxy.query_dump()

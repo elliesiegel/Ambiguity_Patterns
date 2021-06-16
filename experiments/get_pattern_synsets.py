@@ -96,7 +96,7 @@ print("number of nodes that can be presented in the graph", G.number_of_nodes())
 print("number of edges that can be presented in the graph", G.number_of_edges())
 
 
-nx.draw_networkx(G)
+# nx.draw_networkx(G)
 # plt.show()
 # plt.savefig(path_to_save_word_graph_img)
 

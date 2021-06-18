@@ -23,6 +23,37 @@ In the directory: *Ambiguity_Patterns/experiments*
 ```python3 compare_metrics.py Input_Data/semeval2013.csv model_inference_predictions.txt```
 
 
+# Get Word Categories of BERT vs. mBERT
+
+```python3 create_preds_file.py model_inference_predictions.txt > ambig_word-prediction_results.txt```
+
+__ambig_word-prediction_results.txt__:
+
+*ambig word:  group*
+
+*prediction:  any number of entities (members) considered as a unit*
+
+
+```python3 compare_metrics_wordwise.py Input_Data/semeval2013.csv model1_ambig_word-prediction_results.txt model2_ambig_word-prediction_results.txt dir_to_save/results_model1_model2.csv```
+
+__results_model1_model2.csv__:
+
+*ambig word, pred bert, pred mbert, true label*
+
+```python3 categorize.py results_model1_model2.csv false_false.csv --false_false```
+
+```python3 categorize.py results_model1_model2.csv false_true.csv --false_true```
+
+```python3 categorize.py results_model1_model2.csv true_false.csv --true_false```
+
+```python3 categorize.py results_model1_model2.csv true_true.csv --true_true```
+
+*for multilingual vs monolingual comparison do:*
+
+```python3 categorize.py results_model1_model2.csv multilingual_true.csv --multi```
+
+```python3 categorize.py results_model1_model2.csv monolingual_true.csv --mono```
+
 
 **References**:
 

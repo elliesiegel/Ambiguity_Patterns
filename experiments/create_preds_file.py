@@ -1,12 +1,17 @@
-import sys
 import re
+import sys
 
 '''
 example call: 
 python3 create_preds_file.py ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/mbert_finetuned_chkpnt24000.txt > ../results_finetuned_mbert.txt
 
-creates a file with a word and its sense prediction
+
+creates a file with a word and its sense prediction:
+
+ambig word: word
+prediction: sense 
 '''
+
 
 path_to_bert = sys.argv[1]
 

@@ -112,7 +112,7 @@ mbert_words, mbert_preds = get_predictions(path_to_mbert)           # pred mbert
 
 word_sense_lst = list(zip(*[all_words_list, bert_preds, mbert_preds, all_meanings_true]))
 
-header = ["ambig word", "pred bert", "pred finetuned mbert", "true label"]
+header = ["ambig word", "pred bert", "pred mbert", "true label"]
 
 with open(path_out_csv, 'w', encoding='UTF8') as f:
     writer = csv.writer(f)

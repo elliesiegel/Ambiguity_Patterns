@@ -16,6 +16,10 @@ In the directory: *Ambiguity_Patterns/BERT_model/__model_scripts__/*
 ```python3 model_inference.py  directory_pretrained_model/  Input_Data/semeval2013.csv > model_inference_predictions.txt```
 
 
+[directory_pretrained_model](https://entuedu-my.sharepoint.com/personal/boonpeng001_e_ntu_edu_sg/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fboonpeng001%5Fe%5Fntu%5Fedu%5Fsg%2FDocuments%2FBERT%2DWSD%2Fmodel&originalPath=aHR0cHM6Ly9lbnR1ZWR1LW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2Jvb25wZW5nMDAxX2VfbnR1X2VkdV9zZy9FZ3B0NzdFYW1ncEVsOXNPOTBGc3RyWUI1cHMxTzB2c0hVQTRGZnB6ZlZqNnZBP3J0aW1lPVhINnl3bkV5MlVn)
+
+[semeval2013.csv](https://entuedu-my.sharepoint.com/personal/boonpeng001_e_ntu_edu_sg/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly9lbnR1ZWR1LW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL2Jvb25wZW5nMDAxX2VfbnR1X2VkdV9zZy9Fc2RGQ1doQXdpNU90MEl0Qk9TazNVRUJLOEZVd2xNU2lfalNyQk42RnJHcWh3P3J0aW1lPUNURkY2WEV5MlVn&id=%2Fpersonal%2Fboonpeng001%5Fe%5Fntu%5Fedu%5Fsg%2FDocuments%2FBERT%2DWSD%2Fdata%2Ftest)
+
 # Compute Accuracy of a Pre-Trained Model:
 
 In the directory: *Ambiguity_Patterns/experiments*

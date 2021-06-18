@@ -1,7 +1,7 @@
-import json
-import urllib.request
-import pickle
 import re
+import json
+import pickle
+import urllib.request
 from pathlib import Path
 
 

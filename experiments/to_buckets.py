@@ -54,9 +54,15 @@ with open(input_csv, "r") as reader_csv:
 # print("#"*20)
 # print(bucket_3)
 
-print(clique_num_bucket_3)
+print()
+print("bucket 1: ", clique_num_bucket_1)
 print("#"*20)
-
+print()
+print("bucket 2: ", clique_num_bucket_2)
+print("#"*20)
+print()
+print("bucket 3: ", clique_num_bucket_3)
+print()
 
 # bucket_2 ###########
 # only over nodes
@@ -103,13 +109,11 @@ print("#"*20)
 
 ##############################################################################################
 
-# over cliques and clique edges:
+# over cliques and clique edges, true/true vs false/false:
 
-# old:
 # ('barrel', 33, 2196, false) - ('chairman', 33, 1422, true)
 # ('closing', 36, 1752, false) - ('adaptation', 33, 1878, true)
 
-# new:
 # ('advantage', 30, 852, false) - ('applause', 27, 957, true)
 # ('challenge', 138, 6531, false) - ('attitude', 108, 6792, true)
 
@@ -123,3 +127,13 @@ print("#"*20)
 # ('advantage', 30, 852, false) - ('applause', 27, 957, true)
 # ('fault_lines', 12, 243, false) - ('competitor', 15, 228, true)
 # ('club', 117, 10215, false) - ('attitude', 108, 6792, true)
+
+### the variance with weights (clique words + clique edges) is highes with True/True and lower with False/False
+
+
+# true / false vs false / true accord. to cliques and clique-edges
+
+# ('posturing', 3, 3, true_false) - ('reductions', 3, 24, false_true)
+# ('announcement', 18, 615, true_false) - ('capability', 18, 768, false_true)
+# ('basis', 48, 697, true_false) - ('bonus', 42, 798, false_true)
+# ('conference', 30, 544, true_false) - ('questions', 30, 524, false_true)

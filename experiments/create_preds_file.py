@@ -2,7 +2,8 @@ import sys
 import re
 
 '''
-example call: python3 create_preds_file.py ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/mbert_finetuned_chkpnt24000.txt > ../results_finetuned_mbert.txt
+example call: 
+python3 create_preds_file.py ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/mbert_finetuned_chkpnt24000.txt > ../results_finetuned_mbert.txt
 
 creates a file with a word and its sense prediction
 '''

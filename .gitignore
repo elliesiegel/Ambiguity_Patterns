@@ -28,3 +28,4 @@ BERT_model/model_scripts/output_dir/
 experiments/babel_query.dump
 JSON_data_comparison_2/
 babel_query.dump.old
+JSON_data_comparison_bert-BASE-mbert/

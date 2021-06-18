@@ -27,11 +27,14 @@ with open(data_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as cats:
         pred_mbert = row[2]
         true_label = row[3]
 
-        # if pred_bert == true_label and pred_mbert == true_label:
-        #     writer.writerow([ambig_word, "true", "true"])  
+        if pred_bert == true_label and pred_mbert == true_label:
+            writer.writerow([ambig_word, "true", "true"])  
 
         # if pred_bert != true_label and pred_mbert != true_label:
         #     writer.writerow([ambig_word, "false", "false"])
         
-        if pred_bert != true_label and pred_mbert == true_label:
-            writer.writerow([ambig_word, "false", "true"])
+        # if pred_bert != true_label and pred_mbert == true_label:
+        #     writer.writerow([ambig_word, "false", "true"])
+    
+        # if pred_bert == true_label and pred_mbert != true_label:
+        #     writer.writerow([ambig_word, "true", "false"])

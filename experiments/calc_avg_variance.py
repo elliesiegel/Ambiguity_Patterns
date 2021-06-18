@@ -4,9 +4,10 @@ import numpy as np
 
 
 # python3 calc_avg_variance.py vars_results/vars_weight_clique_edges/4_var_edges_cliques_true_false.txt
+
 # to get variance number data: 
 # cat 4_var_true_false.txt | grep " variance btw. edges out. from cliques  " > vars_weight_clique_edges/4_var_edges_cliques_true_false.txt
-# cat 1_var_both_true.txt | grep "variance btw. words in cliques" | grep -o [0-9]*  > vars_weights_clique_nodes/1_var_words_in_cliques_both_true.txt
+# cat 1_var_both_true.txt | grep "variance btw. words in cliques"  > vars_weights_clique_nodes/1_var_words_in_cliques_both_true.txt
 
 
 input_numbers_file = sys.argv[1]

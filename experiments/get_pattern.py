@@ -5,40 +5,108 @@ import os.path
 import argparse
 import itertools
 import urllib.request
+import urllib.parse
 import pickle
 import re
+import time
 from pathlib import Path
+from warnings import catch_warnings
 
+
+ERROR_BAD_JSON_STRING = "Error: Bad JSON-Formating"
 
 class ApiProxy():
 
     def __init__(self, dumpfile_path):
         self.dumpfile_path = dumpfile_path
-        if Path(self.dumpfile_path).is_file():
-            with open(self.dumpfile_path, 'rb') as f:
-                self.query_dict = pickle.load(f)
+        if os.path.isfile(dumpfile_path):
+            raise Exception('dumpfile_path must be a directory!')
+        if not os.path.isdir(dumpfile_path):
+            os.mkdir(dumpfile_path)
+
+    def _query_until_json(self, url, dump_path):
+        while True:
+            try:
+                web_get_data = urllib.request.urlopen(url)
+                json_reply = self._web_get_data_to_json(web_get_data)
+                print('Loaded from URL: ', url)
+                if 'message' in json_reply:
+                    print(json_reply["message"])
+                    if ERROR_BAD_JSON_STRING not in json_reply['message']:
+                        return json_reply
+                with open(dump_path, "w") as out_file:
+                    json.dump(json_reply, out_file, indent = 6) 
+                return json_reply
+            except:
+                print("Reqest Faild for: ", url)
+                print("Retrying after 5 seconds ...")
+                time.sleep(5)
+
+    def _web_get_data_to_json(self, web_get_data):
+        try:
+            return json.load(web_get_data)
+        except:
+            return {"message": ERROR_BAD_JSON_STRING}
+
+    def _replace_lang_in_url(self, lang_triplet, url_template):
+        lan = lang_triplet.split("_")
+        return url_template\
+            .replace("[lan_1]", urllib.parse.quote(lan[0]))\
+            .replace("[lan_2]", urllib.parse.quote(lan[1]))\
+            .replace("[lan_3]", urllib.parse.quote(lan[2]))
+    
+    def _load_from_dump_file(self, path):
+        try:
+            print('Loaded Dump-File: ', path)
+            with open(path, "r") as f:
+                return json.load(f)
+        except:
+            print('Loading Dump-File failed: ', path)
+
+    # synset_ids
+    def make_synset_ids_json_name(self, input_word):
+        return input_word + "_synset_ids.json"
+
+    def query_for_synset_ids_json(self, input_word, babel_net_api_key):
+        path = self.dumpfile_path + '/' + self.make_synset_ids_json_name(input_word)
+        if Path(path).is_file():
+            return self._load_from_dump_file(path)
         else:
-            self.query_dict = {}
+            url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=[babel_net_api_key]"\
+                .replace("[word]", urllib.parse.quote(input_word))\
+                .replace("[babel_net_api_key]", urllib.parse.quote(babel_net_api_key))
+            return self._query_until_json(url, path)
 
-    def query_for_json(self, url):
-        # !!! the re.sub() below reqires reqest URLs not to include argument names ending in "key" !!!
-        keylessurl=re.sub('key=[^&]*','key=API_KEY',url)
-        if keylessurl not in self.query_dict:
-            web_get_synset_ids = urllib.request.urlopen(url)
-            json_reply=json.load(web_get_synset_ids)
-            if 'message' in json_reply:
-                if "Your key is not valid or the daily requests limit has been reached." in json_reply['message']:
-                    print("NO DUMP DUE TO: Your key is not valid or the daily requests limit has been reached.")
-                    return json_reply
-            self.query_dict[keylessurl]=json_reply
-        return self.query_dict[keylessurl]
+    # wordsynsets
+    def make_wordsynsets_json_name(self, idx, lang_triplet):
+        return idx +"_"+ input_word + "_" + lang_triplet + "_wordsynsets.json"
 
-    def query_dump(self):
-        with open(self.dumpfile_path, 'wb') as f:
-            pickle.dump(self.query_dict, f)
-        print("Stored for BabelNet Queries in ", self.dumpfile_path)
+    def query_for_wordsynsets_json(self, idx, lang_triplet, babel_net_api_key):
+        path = self.dumpfile_path + '/' + self.make_wordsynsets_json_name(idx, lang_triplet)
+        if Path(path).is_file():
+            return self._load_from_dump_file(path)
+        else:
+            url_template = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=[lan_1]&targetLang=[lan_2]&targetLang=[lan_3]&targetLang=EN&key=[babel_net_api_key]"\
+                .replace("[synset_id]", urllib.parse.quote(idx))\
+                .replace("[babel_net_api_key]", urllib.parse.quote(babel_net_api_key))
+            return self._query_until_json(self._replace_lang_in_url(lang_triplet, url_template), path)
 
-api_proxy=ApiProxy("babel_query.dump")
+    # wordSenses
+    def make_wordSenses_json_name(self, further_word, lang_triplet):
+        return further_word + "_" + lang_triplet + "_wordSenses.json"
+
+    def query_for_wordSenses_json(self, further_word, lang_triplet, babel_net_api_key):
+        path = self.dumpfile_path + '/' + self.make_wordSenses_json_name(idx, targetLang_searchLang)
+        if Path(path).is_file():
+            return self._load_from_dump_file(path)
+        else:
+            url_template = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=[lan_1]&searchLang=[lan_2]&searchLang=[lan_3]&searchLang=EN&key=[babel_net_api_key]"\
+                .replace("[word]", urllib.parse.quote(further_word))\
+                .replace("[babel_net_api_key]", urllib.parse.quote(babel_net_api_key))
+            return self._query_until_json(self._replace_lang_in_url(lang_triplet, url_template), path)
+
+
+api_proxy=ApiProxy("DUMP")
 
 # import networkx as nx
 # import matplotlib.pyplot as plt
@@ -122,66 +190,38 @@ print("initial word: ", "> ", input_word, " <")
 print("*"*10)
 
 
-# TODO: download only once! -- del targetLang_searchLang
-# data_dir + input_word + "_" + targetLang_searchLang + "_synset_ids.json" into
-# --> data_dir + input_word + "_synset_ids.json"
-def check_files_SynsetIds_exist(data_dir, input_word):
+def creating_files_SynsetIds(data_dir, input_word):
     # if the id file does not exist, create one:
-    if os.path.isfile(data_dir + input_word + "_synset_ids.json") == False:
-
-        url = "https://babelnet.io/v6/getSynsetIds?lemma=[word]&searchLang=EN&key=[babel_net_api_key]"
-        url = url.replace("[word]", input_word)
-        url = url.replace("[babel_net_api_key]", babel_net_api_key)
-        data = api_proxy.query_for_json(url)
-        # web_get_synset_ids = urllib.request.urlopen(url)
-        # data = json.load(web_get_synset_ids) 
-
+    synset_ids_json_path = data_dir + api_proxy.make_synset_ids_json_name(input_word)
+    if not os.path.isfile(synset_ids_json_path):
         # SAVE data in json if the file with the ids does not exist:
-        out_file = open(data_dir + input_word + "_synset_ids.json", "w")
-        json.dump(data, out_file, indent = 6)
-    
+        data = api_proxy.query_for_synset_ids_json(input_word, babel_net_api_key)
+        with open(synset_ids_json_path, "w") as out_file:
+            json.dump(data, out_file, indent = 6)
         return True
+    return False
+    
         
-def check_files_getSynset_exist(idx, lan_1, lan_2, lan_3):
-    if os.path.isfile(data_dir + idx +"_"+ input_word + "_" + targetLang_searchLang + "_wordsynsets.json") == False:
+def check_files_getSynset_exist(idx):
+    wordsynsets_json_path = data_dir + api_proxy.make_wordsynsets_json_name(idx, targetLang_searchLang)
+    if not os.path.isfile(wordsynsets_json_path):
         # sometimes no senses are given, hence error "IndexError: list index out of range" occurs, so catching
         try:
-            # id=bn:00091387v --> id=extracted_id
-            url_for_lemmas = "https://babelnet.io/v6/getSynset?id=[synset_id]&targetLang=[lan_1]&targetLang=[lan_2]&targetLang=[lan_3]&targetLang=EN&key=[babel_net_api_key]"
-            url_for_lemmas = url_for_lemmas.replace("[synset_id]", idx)
-            url_for_lemmas = url_for_lemmas.replace("[lan_1]", lan_1)
-            url_for_lemmas = url_for_lemmas.replace("[lan_2]", lan_2)
-            url_for_lemmas = url_for_lemmas.replace("[lan_3]", lan_3)
-            url_for_lemmas = url_for_lemmas.replace("[babel_net_api_key]", babel_net_api_key)
-
-            data_synsets = api_proxy.query_for_json(url_for_lemmas)
-            # web_get_synsets = urllib.request.urlopen(url_for_lemmas)
-            # data_synsets = json.load(web_get_synsets)
-            out_file = open(data_dir + idx +"_"+ input_word + "_" + targetLang_searchLang + "_wordsynsets.json", "w") 
-            json.dump(data_synsets, out_file, indent = 6) 
+            data_synsets = api_proxy.query_for_wordsynsets_json(idx, targetLang_searchLang, babel_net_api_key)
+            with open(wordsynsets_json_path, "w") as out_file:
+                json.dump(data_synsets, out_file, indent = 6) 
         except:
             pass
-        return True
-    else:
-        return False
+    return os.path.isfile(wordsynsets_json_path)
 
-def check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3): # for further word
-    if os.path.isfile(data_dir + further_word + "_" + targetLang_searchLang + "_wordSenses.json") == False:
+def check_files_getSenses_exist(further_word): # for further word
+    wordSenses_json_path = data_dir + api_proxy.make_wordSenses_json_name(further_word, targetLang_searchLang)
+    if not os.path.isfile(wordSenses_json_path):
         # CALL if files do not exist else give the files in
         try:
-            # [word] may have non ascii chars
-            url = "https://babelnet.io/v6/getSenses?lemma=[word]&searchLang=[lan_1]&searchLang=[lan_2]&searchLang=[lan_3]&searchLang=EN&key=[babel_net_api_key]"
-            url = url.replace("[word]", further_word)
-            url = url.replace("[lan_1]", lan_1)
-            url = url.replace("[lan_2]", lan_2)
-            url = url.replace("[lan_3]", lan_3)
-            url = url.replace("[babel_net_api_key]", babel_net_api_key)
-
-            further_word_data = api_proxy.query_for_json(url)
-            # web_get_synset_ids = urllib.request.urlopen(url)
-            # further_word_data = json.load(web_get_synset_ids)
-            out_file = open(data_dir + further_word + "_" + targetLang_searchLang + "_wordSenses.json", "w") 
-            json.dump(further_word_data, out_file, indent = 6) 
+            further_word_data = api_proxy.query_for_wordSenses_json(further_word, targetLang_searchLang, babel_net_api_key)
+            with open(wordSenses_json_path, "w") as out_file:
+                json.dump(further_word_data, out_file, indent = 6) 
         except:
                 pass
         return True
@@ -189,8 +229,7 @@ def check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3): # for furthe
         return False
 
 
-files_checker = check_files_SynsetIds_exist(data_dir, input_word)
-if files_checker:
+if creating_files_SynsetIds(data_dir, input_word):
     print("files with SynsetIds were created")
 else:
     print("files with SynsetIds already exist")
@@ -198,13 +237,12 @@ print()
 
 node_lst = []
 for lang_set in saved_languages:
-    # TODO: data_dir + input_word + "_synset_ids.json"
-    with open(data_dir + input_word + "_synset_ids.json", "r") as synsets_id_json_file:
+    with open(data_dir + api_proxy.make_synset_ids_json_name(input_word), "r") as synsets_id_json_file:
         synset_ids = json.load(synsets_id_json_file)
         for elem in synset_ids:
             idx = elem["id"]
-            if check_files_getSynset_exist(idx, lan_1, lan_2, lan_3) == False: # the files exist already 
-                with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
+            if check_files_getSynset_exist(idx): # the files exist already 
+                with open(data_dir + api_proxy.make_wordsynsets_json_name(idx, targetLang_searchLang), "r") as word_synsets_json:
                     word_synserts = json.load(word_synsets_json)
                     try:
                         for one_dict in word_synserts:
@@ -220,26 +258,7 @@ for lang_set in saved_languages:
                             lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
                             node_lst.append(lemma_and_lang)
                             # print("**********************************************")
-            else:
-                check_files_getSynset_exist(idx, lan_1, lan_2, lan_3)
-                ###### copied from above -- TODO node_lst will not be filled with node values
-                with open(data_dir + idx +"_"+ input_word + "_" + lang_set + "_wordsynsets.json", "r") as word_synsets_json:
-                    word_synserts = json.load(word_synsets_json)
-                    try:
-                        for one_dict in word_synserts:
-                            # print(one_dict["properties"])
-                            # print()
-                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                            node_lst.append(lemma_and_lang)
-                            # print("**********************************************")
-                    except:
-                        for one_dict in word_synserts["senses"]:
-                            # print(one_dict["properties"])
-                            # print()
-                            lemma_and_lang = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                            node_lst.append(lemma_and_lang)
-                            # print("**********************************************")
-                ###### 
+  
 
     print("1st level : ", node_lst)
     node_num1 = len(node_lst)
@@ -254,10 +273,10 @@ for elem in node_lst:
     # G.add_edges_from([(input_word, elem)]) # example elem = ('Page_boy_(wedding_attendant)', 'EN')
     # num_edges += 1
     further_word = elem[0]
-    if check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3) == False:
+    if not check_files_getSenses_exist(further_word):
         for lang_set in saved_languages:
             try:
-                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
+                with open(data_dir + api_proxy.make_wordSenses_json_name(further_word, lang_set), "r") as further_word_json:
                     further_word_senses = json.load(further_word_json)
                     for one_dict in further_word_senses:
                         node_num1 += 1
@@ -267,22 +286,6 @@ for elem in node_lst:
                         # num_edges += 1
             except:
                 pass
-    else:
-        check_files_getSenses_exist(further_word, lan_1, lan_2, lan_3)
-        for lang_set in saved_languages:
-            try:
-                with open(data_dir + further_word + "_" + lang_set + "_wordSenses.json", "r") as further_word_json:
-                    further_word_senses = json.load(further_word_json)
-                    for one_dict in further_word_senses:
-                        node_num1 += 1
-                        further_node = (one_dict["properties"]["fullLemma"], one_dict["properties"]["language"])
-                        # print(elem, " --> ", further_node)
-                        # G.add_edges_from([(elem, further_node)])
-                        # num_edges += 1
-            except:
-                pass
-
-api_proxy.query_dump()
 
 # print()
 # print("Final numbers:")

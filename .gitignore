@@ -25,7 +25,11 @@ list-of-files-before.txt
 *.csv
 BERT_model/model_scripts/runs/
 BERT_model/model_scripts/output_dir/
-experiments/babel_query.dump
 JSON_data_comparison_2/
-babel_query.dump.old
 JSON_data_comparison_bert-BASE-mbert/
+DUMP (copy)/
+old-DUMP/
+DUMP/
+JSON_FINAL/
+JSON_FINAL_BACKUP/
+*.old

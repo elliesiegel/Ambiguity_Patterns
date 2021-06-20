@@ -101,7 +101,7 @@ print("#"*20)
 print("number out clique-edges ->> ", cnt_edges_from_a_clique)  # number of outgoing edges from a clique (sub-graph)
 
 print()
-print(" variance btw. words in cliques", statistics.variance(list(cnt_clique_words.values())))
+print(" variance btw. words in cliques ", statistics.variance(list(cnt_clique_words.values())))
 print(" variance btw. edges out. from cliques ", statistics.variance((list(cnt_edges_from_a_clique.values()))))
 
 c = CircosPlot(graph=G)

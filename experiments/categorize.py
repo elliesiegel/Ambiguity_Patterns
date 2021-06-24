@@ -1,6 +1,5 @@
 import argparse
 import csv
-import sys
 
 '''
 categorizes word's sentences into 4 categories for mbert and bert
@@ -65,6 +64,12 @@ parser.add_argument(
     help="only words from multilingual BERT predicted correctly"
 )
 
+parser.add_argument(
+    "--multi_false",
+    action='store_true',
+    help="only words from multilingual BERT predicted falsely"
+)
+
 
 args = parser.parse_args()
 
@@ -78,6 +83,7 @@ false_false = args.false_false
 
 mono = args.monolingual
 multi = args.multilingual
+multi_false = args.multi_false
 
 with open(input_file_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as cats:
 
@@ -113,6 +119,11 @@ with open(input_file_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as 
             if pred_bert == true_label:
                 writer.writerow([ambig_word, "bert true", "-"])
                 
+
         if multi:
             if pred_mbert == true_label:
                 writer.writerow([ambig_word, "-", "mbert true"])
+        
+        if multi_false:
+            if pred_mbert != true_label:
+                writer.writerow([ambig_word, "-", "mbert false"])

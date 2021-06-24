@@ -27,6 +27,7 @@ do
 	fi
 	echo "+++++++++ next word: $WORD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	for LANG in DE_ES_FR CS_IT_NN RU_UK_PL
+	#for LANG in DE_ES_FR # IT_RU_EN
 	do 
 		echo "+++++++++ next lang: $LANG ++++++++++"
 		echo $WORD > crawler-vars-falses/current_word_loading
@@ -34,7 +35,7 @@ do
 		python3 get_pattern.py --targetLang_searchLang $LANG --languages $LANG $WORD $TARGET_DIR/words/$WORD/ $API_KEY
 		# Check if babelnet queries are still available
 		# cancel if over limit
-		if grep -q "Your key is not valid or the daily requests limit has been reached.\|The maximum keys number per IP has been reached." $TARGET_DIR/words/$WORD/*$LANG*
+		if grep -q "Your key is not valid or the daily requests limit has been reached.\|The maximum keys number per IP has been reached." $TARGET_DIR/words/$WORD/*
 		then
 			echo "Ending Script - no more queries available"
 			rm -rf $TARGET_DIR/words/$WORD
@@ -52,14 +53,29 @@ do
 	python3 get_sense_graph.py $TARGET_DIR/words/$WORD/ $TARGET_DIR/RESULTS_figure_CSV/$WORD > $TARGET_DIR/get_sense_graph_output/$WORD
 
 	# STEP 5: create CSVs
-	NODES=$(grep total $TARGET_DIR/get_pattern_synsets-output/$WORD | grep nodes: | grep -o "[0-9]*")
-	EDGES=$(grep total $TARGET_DIR/get_pattern_synsets-output/$WORD | grep edges: | grep -o "[0-9]*")
-	NUM_CLIQUES=$(grep total $TARGET_DIR/get_sense_graph_output/$WORD | grep "total number cliques" | grep -o "[0-9]*")
-	CLIQUE_EDGES=$(grep total $TARGET_DIR/get_sense_graph_output/$WORD | grep "total number clique-edges" | grep -o "[0-9]*")
-	echo "$WORD,$NODES,$EDGES,$NUM_CLIQUES,$CLIQUE_EDGES" >> $TARGET_DIR/RESULTS_figure_CSV/word-nodes-edges.csv
+	# metrics for word graph:
+	NODES=$(grep "total number of nodes:" $TARGET_DIR/get_pattern_synsets-output/$WORD | grep -o "[0-9]*")
+	EDGES=$(grep "total number of edges:" $TARGET_DIR/get_pattern_synsets-output/$WORD | grep -o "[0-9]*")
+	
+	# metrics for sense graph:
+	NUM_CLIQUES=$(grep "total number cliques" $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*")
+	CLIQUE_EDGES=$(grep "total number clique-edges" $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*")
+
+	VAR_WORDS_CLIQUES=$(grep " variance btw. words in cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
+	VAR_EDGES_CLIQUES=$(grep " variance btw. edges out. from cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
+
+	echo "$WORD,$NODES,$EDGES,$NUM_CLIQUES,$CLIQUE_EDGES,$VAR_WORDS_CLIQUES,$VAR_EDGES_CLIQUES" >> $TARGET_DIR/RESULTS_figure_CSV/word-nodes-edges.csv
 
 done
 echo "----------------------------------------------------------------------------------------------------"
 echo " :D  you reached the end of the word list!"
 
 echo -n "" > crawler-vars-falses/current_word_loading
+
+# WORD
+# NODES
+# EDGES
+# NUM_CLIQUES
+# CLIQUE_EDGES
+# VAR_WORDS_CLIQUES
+# VAR_EDGES_CLIQUES

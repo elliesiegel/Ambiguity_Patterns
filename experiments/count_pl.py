@@ -11,15 +11,28 @@ with open(input_csv) as csvfile:
     for row in scv_reader:
         word = row[0]
         all_words.add(word)
-        if word.endswith("s") and row[1] == "false" and row[2] == "false":    # words plural and false
+        if word.endswith("s"): # and row[1] == "false" and row[2] == "false":    # words plural and false
         # if row[1] == "true":
             pl_words_set.add(word)
 
-print(len(pl_words_set))
+cnt_phrases = 0
+for word in all_words:
+    if len(word.split(" ")) > 1:
+        cnt_phrases += 1
+        print(word)
+
+# print(cnt_phrases)
+# print(len(pl_words_set))
 # print(len(all_words))      
 proper_names_false = ['United States Supreme Court', 'U.S.', 'Department of Energy', 'Fannie Mae', 'National Institutes of Health', 'Open University', 'Bush administration', 'San Jose', 'New York', 'Superior Court', 'Dow Jones', 'Code of Conduct', 'Washington', 'United States Senate', 'Central America', 'European countries', 'Costa Rica', 'World Cup', 'Wall Street', 'Supreme Court', 'Freddie Mac', 'South America', 'United Nations', 'European Union', 'Russia', 'New York Stock Exchange', 'Dominican Republic']
 proper_names_true = ['Cleveland', 'Calif.', 'Peru', 'Venezuela', 'India', 'Mexico', 'Panama', 'Washington', 'NASA', 'Connecticut', 'France', 'Europe',  'China', 'Iraq', 'Israel', 'US', 'America', 'Brazil', 'NASDAQ', 'USA']
 # print(len(proper_names_true))
+
+### base bert vs mbert ###
+
+
+
+##########################
 
 # 668 words total
 # 56 words plural right prediction by both models (all plurals BERT predicted crrectly, mBERT predicted correctly as well)

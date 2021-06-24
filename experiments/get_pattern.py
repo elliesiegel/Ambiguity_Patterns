@@ -202,7 +202,7 @@ def creating_files_SynsetIds(data_dir, input_word):
     return False
     
         
-def check_files_getSynset_exist(idx):
+def download_files_getSynset(idx):
     wordsynsets_json_path = data_dir + api_proxy.make_wordsynsets_json_name(idx, targetLang_searchLang)
     if not os.path.isfile(wordsynsets_json_path):
         # sometimes no senses are given, hence error "IndexError: list index out of range" occurs, so catching
@@ -241,7 +241,7 @@ for lang_set in saved_languages:
         synset_ids = json.load(synsets_id_json_file)
         for elem in synset_ids:
             idx = elem["id"]
-            if check_files_getSynset_exist(idx): # the files exist already 
+            if download_files_getSynset(idx): # the files exist already 
                 with open(data_dir + api_proxy.make_wordsynsets_json_name(idx, targetLang_searchLang), "r") as word_synsets_json:
                     word_synserts = json.load(word_synsets_json)
                     try:

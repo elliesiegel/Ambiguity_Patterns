@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from nxviz.plots import CircosPlot
 
 '''
-example call: python3 get_sense_graph.py JSON_data_comparison/both_ture/climate/ path_to_img
+example call: python3 get_sense_graph_monolingual.py JSON_FINAL/multilingual_false/words/term/ ./name_word.png
 '''
 
 path_to_input_jsons = sys.argv[1]
@@ -36,12 +36,12 @@ def get_wordsynsets(wordsynsets):
 
         with open(synsets_file) as word_synsets_reader:
             word_synsets = json.load(word_synsets_reader)
-
             for one_dict in word_synsets["senses"]:
                 try:
-                    lemma_and_lang = (one_dict["properties"]["fullLemma"] + "_" +one_dict["properties"]["language"])
-                    node_set.add(lemma_and_lang)
-                    # G.add_node(lemma_and_lang, role=role)
+                    if one_dict["properties"]["language"] == "EN":
+                        lemma_and_lang = (one_dict["properties"]["fullLemma"] + "_" + one_dict["properties"]["language"])
+                        node_set.add(lemma_and_lang)
+                        # G.add_node(lemma_and_lang, role=role)
                 except:
                     pass
         # print("----------------------------")
@@ -88,9 +88,9 @@ def get_wordsynsets(wordsynsets):
 
 synsets, synset_edges, cnt_clique_words, cnt_edges_from_a_clique  = get_wordsynsets(wordsynsets)
 
-print("total number cliques: ", synsets)
-print("total number clique-edges: ", synset_edges)  # total clique edges from word in cl 1 to word in cl2
-print("number of edges (btw cliques) can be presented in graph: ", G.number_of_edges())
+print("total number cliques  mono (EN): ", synsets)
+print("total number clique-edges mono (EN): ", synset_edges)  # total clique edges from word in cl 1 to word in cl2
+# print("number of edges (btw cliques) can be presented in graph: ", G.number_of_edges())
 
 print()
 print("number words in a clique --> ", cnt_clique_words)    # number of words in a clique (sub-graph)
@@ -98,8 +98,8 @@ print("#"*20)
 print("number out clique-edges ->> ", cnt_edges_from_a_clique)  # number of outgoing edges from a clique (sub-graph)
 
 print()
-print(" variance btw. words in cliques ", statistics.variance(list(cnt_clique_words.values())))
-print(" variance btw. edges out. from cliques ", statistics.variance((list(cnt_edges_from_a_clique.values()))))
+print(" variance btw. words in cliques mono (EN):", statistics.variance(list(cnt_clique_words.values())))
+print(" variance btw. edges out. from cliques mono (EN):", statistics.variance((list(cnt_edges_from_a_clique.values()))))
 
 c = CircosPlot(graph=G)
 c.draw()

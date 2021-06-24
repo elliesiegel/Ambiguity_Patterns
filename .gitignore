@@ -33,3 +33,7 @@ DUMP/
 JSON_FINAL/
 JSON_FINAL_BACKUP/
 *.old
+JSON_FINAL_over_12_langs/
+JSON_FINAL_tmp/
+DUMP_pickle/
+DUMP_saved_copy_35_795_tsd_docs/

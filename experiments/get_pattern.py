@@ -30,8 +30,11 @@ class ApiProxy():
                 web_get_data = urllib.request.urlopen(url)
                 json_reply = self._web_get_data_to_json(web_get_data)
                 print('Loaded from URL: ', url)
+                # if a json_reply includes a "message" field, we assume used up API calls for the day.
                 if 'message' in json_reply:
                     print(json_reply["message"])
+                    # The following check makes sure badly formated JSON is rememberd by the DUMP
+                    # and thus not downloaded multiple times. (Waisting API calls)
                     if ERROR_BAD_JSON_STRING not in json_reply['message']:
                         return json_reply
                 with open(dump_path, "w") as out_file:

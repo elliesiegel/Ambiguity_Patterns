@@ -78,10 +78,20 @@ def get_wordsynsets(wordsynsets):
                         # print()
                         cnt_edges_from_clique.append(pair1[0])
                         # print("#"*20)
-                        num_edges_synsets += 1
                         G.add_edges_from([(pair1[0], pair2[0])])
+                        num_edges_synsets += 1
                         # print(type(pair1[0]), type(pair2[0]))
     cnt_edges_from_a_clique = Counter(cnt_edges_from_clique)
+
+    no_second_degree_edges_nodes = [node for node, degree in dict(G.degree()).items() if degree == 0]
+    if len(no_second_degree_edges_nodes) != 0:
+        num_synset += 1 # count one node more for init_word_node
+        edges_to_init_word_node = 0
+        for node in no_second_degree_edges_nodes:
+            G.add_edges_from([(node, "init_word_node")])
+            edges_to_init_word_node += 1
+
+        num_edges_synsets += edges_to_init_word_node
 
     return num_synset, num_edges_synsets, cnt_clique_words, cnt_edges_from_a_clique
 
@@ -90,7 +100,7 @@ synsets, synset_edges, cnt_clique_words, cnt_edges_from_a_clique  = get_wordsyns
 
 print("total number cliques: ", synsets)
 print("total number clique-edges: ", synset_edges)  # total clique edges from word in cl 1 to word in cl2
-print("number of edges (btw cliques) can be presented in graph: ", G.number_of_edges())
+# print("number of edges (btw cliques) can be presented in graph: ", G.number_of_edges())
 
 print()
 print("number words in a clique --> ", cnt_clique_words)    # number of words in a clique (sub-graph)

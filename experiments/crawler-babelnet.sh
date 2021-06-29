@@ -27,7 +27,7 @@ do
 	fi
 	echo "+++++++++ next word: $WORD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	for LANG in DE_ES_FR CS_IT_NN RU_UK_PL
-	#for LANG in DE_ES_FR # IT_RU_EN
+	# for LANG in DE_ES_FR # IT_RU_EN
 	do 
 		echo "+++++++++ next lang: $LANG ++++++++++"
 		echo $WORD > crawler-vars-falses/current_word_loading
@@ -71,15 +71,15 @@ do
 	NUM_CLIQUES=$(grep "total number cliques" $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*")
 	CLIQUE_EDGES=$(grep "total number clique-edges" $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*")
 
-	VAR_WORDS_CLIQUES=$(grep " variance btw. words in cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
-	VAR_EDGES_CLIQUES=$(grep " variance btw. edges out. from cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
+	VAR_WORDS_CLIQUES=$(grep " variance btw. words in cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.\?[0-9]*" | grep [0-9] )
+	VAR_EDGES_CLIQUES=$(grep " variance btw. edges out. from cliques " $TARGET_DIR/get_sense_graph_output/$WORD | grep -o "[0-9]*\.\?[0-9]*" | grep [0-9] )
 
 	# metrics for sense graph monolingual:
 	NUM_CLIQUES_MONO=$(grep "total number cliques  mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*")
 	CLIQUE_EDGES_MONO=$(grep "total number clique-edges mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*")
 
-	VAR_WORDS_CLIQUES_MONO=$(grep " variance btw. words in cliques mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
-	VAR_EDGES_CLIQUES_MONO=$(grep " variance btw. edges out. from cliques mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*\.[0-9]*" | grep [0-9] )
+	VAR_WORDS_CLIQUES_MONO=$(grep " variance btw. words in cliques mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*\.\?[0-9]*" | grep [0-9] )
+	VAR_EDGES_CLIQUES_MONO=$(grep " variance btw. edges out. from cliques mono (EN):" $TARGET_DIR/get_sense_monolingual_graph_output/$WORD | grep -o "[0-9]*\.\?[0-9]*" | grep [0-9] )
 
 	# multilingual data
 	echo "$WORD,$NODES,$EDGES,$NUM_CLIQUES,$CLIQUE_EDGES,$VAR_WORDS_CLIQUES,$VAR_EDGES_CLIQUES" >> $TARGET_DIR/RESULTS_figure_CSV/word-nodes-edges.csv

@@ -1,10 +1,13 @@
 import pandas
-from statistics import mean 
+import math
 import sys
 
 
+# python3 get_average.py JSON_data_comparison_2/both_false/RESULTS_figure_CSV/word-nodes-edges.csv
+
+
 input_file = sys.argv[1]
-colnames = ['word', 'nodes', 'edges', 'num_cliques', 'num_clique_edges']
+colnames = ['word', 'nodes', 'edges', 'num_cliques', 'num_clique_edges', 'var_words_cliques', 'var_edges_cliques']
 data = pandas.read_csv(input_file, names=colnames)
 
 nodes_lst = data.nodes.tolist()
@@ -19,6 +22,13 @@ print("num cliques avg.:", sum(num_cliques_lst) / len(num_cliques_lst))
 num_clique_edges_lst = data.num_clique_edges.tolist()
 print("num clique edges avg.:", sum(num_clique_edges_lst) / len(num_clique_edges_lst))
 
+var_words_cliques_lst = data.var_words_cliques.tolist()
+var_words_cliques_lst_clean = [num for num in var_words_cliques_lst if math.isnan(num) == False]
+print("variance words cliques avg.:", sum(var_words_cliques_lst_clean) / len(var_words_cliques_lst_clean))
+
+var_edges_cliques_lst = data.var_edges_cliques.tolist()
+var_edges_cliques_lst_clean = [num for num in var_edges_cliques_lst if math.isnan(num) == False]
+print("variance edges cliques avg.:", sum(var_edges_cliques_lst_clean) / len(var_edges_cliques_lst_clean))
 
 #################################################
 # all trues filtered:

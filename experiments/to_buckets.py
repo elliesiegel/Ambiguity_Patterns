@@ -64,6 +64,68 @@ print()
 print("bucket 3: ", clique_num_bucket_3)
 print()
 
+# clique / clique-edges for TT vs. FF:
+
+# ('auctions', 3, 92, false) - ('banalities', 3, 84, true)
+# 1012.3333333333333,200     -   0,392
+
+# ('New_York_Stock_Exchange', 4, 94, false) - ('banalities', 3, 84, true)
+# 290.3333333333333,968                     - 0,392
+
+# ('life_forms', 3, 24, false) - ('investors', 3, 21, true)
+# 1.3333333333333333,32        - 74.33333333333333,24.5
+
+# ('life_forms', 3, 24, false) - ('reductions', 3, 24, true)
+# 1.3333333333333333,32        - 133.33333333333334,32
+
+# ('Freddie_Mac', 3, 36, false) - ('cameras', 3, 42, true)
+# 175,162                       - 161.33333333333331,98
+
+# ('obligations', 3, 30, false) - ('cameras', 3, 42, true)
+# 114.33333333333333,50         - 161.33333333333331,98
+
+# ('obligations', 3, 30, false) - ('culpability', 3, 31, true)
+# 114.33333333333333,50         - 154.33333333333331,40.5
+
+# ('obligations', 3, 30, false) - ('hordes', 3, 24, true)
+# 114.33333333333333,50         - 0.3333333333333333,32
+
+# ('Freddie_Mac', 3, 36, false) - ('culpability', 3, 31, true)
+# 175,162                       - 154.33333333333331,40.5
+
+# ('courts', 9, 84, false) - ('imposition', 9, 78, true)
+# ('National_Institutes_of_Health', 6, 114, false) - ('risks', 6, 139, true)
+# ('courts', 9, 84, false) - ('reporting', 9, 88, true)
+# ('justices', 3, 101, false) - ('waiters', 3, 105, true)
+# (life_forms', 3, 24, false) - ('economists', 3, 25, true)
+# ('narrow_margin', 9, 49, false) - ('responsiveness', 9, 49, true)
+# ('narrow_margin', 9, 49, false) - ('ruling', 9, 50, true)
+# ('auctions', 3, 92, false) - ('prosecutors', 3, 95, true)
+
+
+# ('acceptance', 45, 659, false) - ('election', 42, 679, true)
+# ('photographs', 27, 366, false) - ('proposal', 27, 356, true)
+# ('publication', 15, 320, false) - ('immigrants', 15, 303, true)
+# ('publication', 15, 320, false) - ('Immigration', 15, 313, true)
+# ('hard_time', 24, 309, false) - ('poverty', 24, 303, true)
+# ('robustness', 24, 345, false) - ('poverty', 24, 303, true)
+# ('growth', 39, 712, false) - ('height', 39, 754, true)
+# ('violence', 45, 630, false) - ('matter', 48, 580, true)
+# ('things', 33, 546, false) - ('lawyer', 33, 517, true)
+# ('Department_of_Energy', 27, 410, false) - ('imperative', 27, 359, true)
+# ('speculation', 21, 387, false) - ('heading', 21, 340, true)
+# ('things', 33, 546, false) - ('intention', 33, 487, true)
+# ('appearance', 30, 507, false) - ('verdict', 30, 526, true)
+# ('appearance', 30, 507, false) - ('ethos', 31, 512, true)
+# ('spite', 24, 212, false) - ('Nicaragua', 22, 243, true)
+
+
+# ('advance', 144, 7176, false) - ('discovery', 157, 8073, true)
+# ('tone', 118, 4213, false) - ('firm', 120, 5150, true)
+#  - ('law', 132, 3789, true)
+
+
+
 # bucket_2 ###########
 # only over nodes
 # ('temperature', 678597, true) - ('Appeal', 674733, false)
@@ -128,7 +190,7 @@ print()
 # ('fault_lines', 12, 243, false) - ('competitor', 15, 228, true)
 # ('club', 117, 10215, false) - ('attitude', 108, 6792, true)
 
-### the variance with weights (clique words + clique edges) is highes with True/True and lower with False/False
+### the variance with weights (clique words + clique edges) is higher with True/True and lower with False/False
 
 
 # true / false vs false / true accord. to cliques and clique-edges

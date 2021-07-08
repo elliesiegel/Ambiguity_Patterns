@@ -92,8 +92,8 @@ total_nodes = len(all_word_nodes) + node_num_wordSenses
 print()
 print("total number of nodes:", total_nodes)
 print("total number of edges:", num_edges_wordsynsets + num_edges_wordSenses)
-#print("number of nodes that can be presented in the graph:", G.number_of_nodes())
-#print("number of edges that can be presented in the graph:", G.number_of_edges())
+# print("number of nodes that can be presented in the graph:", G.number_of_nodes())
+# print("number of edges that can be presented in the graph:", G.number_of_edges())
 
 
 # nx.draw_networkx(G)

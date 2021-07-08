@@ -59,6 +59,24 @@ __results_model1_model2.csv__:
 ```python3 categorize.py results_model1_model2.csv monolingual_true.csv --mono```
 
 
+**Data Collection Pipeline**:
+
+In order to collect word data ambiguity graphs, we construct a data pipeline.
+
+```for API_KEY in your_apikey; do ./crawler-babelnet.sh category/word_list.txt where_to_save_data/category/ $API_KEY; done```
+
+
+The file *tmp-helper.sh* calls the script for each category multiple times.
+
+In each category *(TT/TF/FT/FF for BERT and mBERT predictions of word senses)* we create directories where we save multilingual ambiguity graphs as well as monolingual ambiguity graph information.
+
+We also create a directory called *words* where all words' graph information is stored in a json format.
+
+The results are saved in *word-nodes-edges.csv* and *word-nodes-edges-monolingual.csv* files that have the following graph information per each line:
+
+*word, num nodes, num edges, num clique nodes, num clique-edges, var clique-weights, var clique-edges weights*
+
+
 **References**:
 
 [How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)

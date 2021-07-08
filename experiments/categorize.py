@@ -59,6 +59,12 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "--mono_false",
+    action='store_true',
+    help="only words from BERT predicted falsely"
+)
+
+parser.add_argument(
     "--multilingual",
     action='store_true',
     help="only words from multilingual BERT predicted correctly"
@@ -84,6 +90,7 @@ false_false = args.false_false
 mono = args.monolingual
 multi = args.multilingual
 multi_false = args.multi_false
+mono_false = args.mono_false
 
 with open(input_file_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as cats:
 
@@ -118,8 +125,11 @@ with open(input_file_csv) as csvfile, open(output_csv, 'w', encoding='UTF8') as 
         if mono:
             if pred_bert == true_label:
                 writer.writerow([ambig_word, "bert true", "-"])
-                
 
+        if mono_false:
+            if pred_bert != true_label:
+                writer.writerow([ambig_word, "-", "bert false"])
+                
         if multi:
             if pred_mbert == true_label:
                 writer.writerow([ambig_word, "-", "mbert true"])

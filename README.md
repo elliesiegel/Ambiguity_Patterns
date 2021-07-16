@@ -66,7 +66,7 @@ In order to collect word data ambiguity graphs, we construct a data pipeline.
 ```for API_KEY in your_apikey; do ./crawler-babelnet.sh category/word_list.txt where_to_save_data/category/ $API_KEY; done```
 
 
-The file *tmp-helper.sh* calls the script for each category multiple times.
+The file *tmp-helper.sh* calls the script for each category multiple times (s. *experiments/tmp-helper.sh*).
 
 In each category *(TT/TF/FT/FF for BERT and mBERT predictions of word senses)* we create directories where we save multilingual ambiguity graphs as well as monolingual ambiguity graph information.
 

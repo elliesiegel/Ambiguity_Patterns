@@ -64,6 +64,27 @@ print()
 print("bucket 3: ", clique_num_bucket_3)
 print()
 
+#################
+
+# diff in structure:
+
+# ('narrow_margin', 9, 49, false) - ('ruling', 9, 50, true)
+# ('courts', 9, 84, false) - ('imposition', 9, 78, true)
+# ('narrow_margin', 9, 49, false) - ('responsiveness', 9, 49, true)
+# ('violence', 45, 630, false) - ('matter', 48, 580, true)
+# ('speculation', 21, 387, false) - ('heading', 21, 340, true)
+# ('things', 33, 546, false) - ('intention', 33, 487, true)
+# ('spite', 24, 212, false) - ('Nicaragua', 22, 243, true)
+# ('tone', 118, 4213, false) - ('firm', 120, 5150, true)
+
+# !! vica versa !!:
+# ('acceptance', 45, 659, false) - ('election', 42, 679, true) 
+# ('publication', 15, 320, false) - ('immigrants', 15, 303, true)
+# ('publication', 15, 320, false) - ('Immigration', 15, 313, true)
+
+#################
+
+
 # clique / clique-edges for TT vs. FF:
 
 # ('auctions', 3, 92, false) - ('banalities', 3, 84, true)
@@ -93,14 +114,13 @@ print()
 # ('Freddie_Mac', 3, 36, false) - ('culpability', 3, 31, true)
 # 175,162                       - 154.33333333333331,40.5
 
-# ('courts', 9, 84, false) - ('imposition', 9, 78, true)
+# ('auctions', 3, 92, false) - ('prosecutors', 3, 95, true)
 # ('National_Institutes_of_Health', 6, 114, false) - ('risks', 6, 139, true)
 # ('courts', 9, 84, false) - ('reporting', 9, 88, true)
 # ('justices', 3, 101, false) - ('waiters', 3, 105, true)
 # (life_forms', 3, 24, false) - ('economists', 3, 25, true)
 # ('narrow_margin', 9, 49, false) - ('responsiveness', 9, 49, true)
 # ('narrow_margin', 9, 49, false) - ('ruling', 9, 50, true)
-# ('auctions', 3, 92, false) - ('prosecutors', 3, 95, true)
 
 
 # ('acceptance', 45, 659, false) - ('election', 42, 679, true)
@@ -122,7 +142,7 @@ print()
 
 # ('advance', 144, 7176, false) - ('discovery', 157, 8073, true)
 # ('tone', 118, 4213, false) - ('firm', 120, 5150, true)
-#  - ('law', 132, 3789, true)
+# ('deal', 132, 4383, false) - ('law', 132, 3789, true)
 
 
 

@@ -27,7 +27,7 @@ do
 	fi
 	echo "+++++++++ next word: $WORD +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	for LANG in DE_ES_FR CS_IT_NN RU_UK_PL
-	# for LANG in DE_ES_FR # IT_RU_EN
+	#for LANG in DE_ES_FR # IT_RU_EN
 	do
 		echo "+++++++++ next lang: $LANG ++++++++++"
 		echo $WORD > crawler-vars-falses/current_word_loading

@@ -4,7 +4,11 @@ import sys
 
 
 # python3 get_average.py JSON_data_comparison_2/both_false/RESULTS_figure_CSV/word-nodes-edges.csv
+'''
+calculate average value per category per column in a csv file: 
+(nodes, edges, clique-node, clique-node-edges, variance within clique-nodes, variance of clique-edge weights)
 
+'''
 
 input_file = sys.argv[1]
 colnames = ['word', 'nodes', 'edges', 'num_cliques', 'num_clique_edges', 'var_words_cliques', 'var_edges_cliques']

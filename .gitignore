@@ -39,3 +39,4 @@ DUMP_pickle/
 DUMP_saved_copy_35_795_tsd_docs/
 all_4_cats_csv_bert-base/
 ../BERT_model/results_on_mBERT/inferred_on_semeval_test_2013/bert_BASE.txt
+miscellaneous_bash

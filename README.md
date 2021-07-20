@@ -78,6 +78,9 @@ The results are saved in *word-nodes-edges.csv* and *word-nodes-edges-monolingua
 *word, num nodes, num edges, num clique nodes, num clique-edges, var clique-weights, var clique-edges weights*
 
 
+*Note:* for more detailed information about the categories and how to measure an ambiguity graph per category and a word, see *experiments/README.md*
+
+
 **References**:
 
 [How multilingual is Multilingual BERT?](http://www.dhgarrette.com/papers/pires_multilingual_bert_acl2019.pdf)

@@ -2,15 +2,15 @@
 
 # example call:    ./crawler-babelnet.sh wordlist.csv JSON_data_comparison/both_false/ API_KEY
 
-WORD_CSV="$1"
-TARGET_DIR="$2" # e.g. JSON_data_comparison/both_false
-API_KEY="$3"
+WORD_CSV="$1"		# or a list with words
+TARGET_DIR="$2"		# e.g. JSON_data_comparison/both_false
+API_KEY="$3"		# your api babelnet access key
 mkdir -p $TARGET_DIR/words
 mkdir -p $TARGET_DIR/RESULTS_figure_CSV
 mkdir -p $TARGET_DIR/get_pattern_synsets-output
 mkdir -p $TARGET_DIR/get_sense_graph_output
 
-# this script reqires the following virtual environment for python
+# this script requires the following virtual environment for python
 if test "wsd_MA" != "$CONDA_DEFAULT_ENV"
 then
 	echo "Please go into the right environment (try: conda activate wsd_MA )"
@@ -19,7 +19,7 @@ fi
 
 for WORD in $(sed 's/,.*//g' "$WORD_CSV" | tr " " _ )
 do
-	# Skip allready downloaded words
+	# Skip already downloaded words
 	if test -d $TARGET_DIR/words/$WORD
 	then
 		echo "skip: $WORD"
@@ -102,8 +102,3 @@ echo -n "" > crawler-vars-falses/current_word_loading
 # CLIQUE_EDGES
 # VAR_WORDS_CLIQUES
 # VAR_EDGES_CLIQUES
-
-# Note for monolingual:
-# 1. get_pattern_monolingual_synsets-output
-# 2. get_sense_monolingual_graph_output
-# 3. RESULTS_figure_CSV_monolingual

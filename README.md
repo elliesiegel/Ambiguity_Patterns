@@ -6,8 +6,6 @@ Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Am
 
 ```pip install -r requirements.txt```
 
-change to the branch: *count_nodes_edges*
-
 
 # Get the Inference of a Pre-Trained Model:
 
@@ -59,14 +57,17 @@ __results_model1_model2.csv__:
 ```python3 categorize.py results_model1_model2.csv monolingual_true.csv --mono```
 
 
+For the *categorize.py* file see *helper_programs/categorize.py*
+
+
 **Data Collection Pipeline**:
 
 In order to collect word data ambiguity graphs, we construct a data pipeline.
 
-```for API_KEY in your_apikey; do ./crawler-babelnet.sh category/word_list.txt where_to_save_data/category/ $API_KEY; done```
+```./crawler-babelnet.sh category/word_list.txt where_to_save_data/category/ API_KEY```
 
 
-The file *tmp-helper.sh* calls the script for each category multiple times (s. *experiments/tmp-helper.sh*).
+In the file *run_all_cats.sh* example calls can be found to run the *crawler-babelnet.sh* script for each category at once (s. *experiments/run_all_cats.sh* as well as *experiments/crawler-babelnet.sh*).
 
 In each category *(TT/TF/FT/FF for BERT and mBERT predictions of word senses)* we create directories where we save multilingual ambiguity graphs as well as monolingual ambiguity graph information.
 

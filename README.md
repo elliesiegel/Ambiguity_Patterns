@@ -1,6 +1,6 @@
 # Ambiguity_Patterns
 
-Master Thesis at Ludwig Maximilian University Munich (LMU). Project on **Word Ambiguity Detection with multilingual BERT** / Transformer architectures and pretrained models.  Data used in this project: https://babelnet.org/
+Master Thesis at [Ludwig Maximilian University Munich (LMU)](https://www.lmu.de/en/index.html). Project on **Word Ambiguity Detection with (multilingual) BERT** / Transformer architectures and pretrained language models (PLMs).  Data used in this project: https://babelnet.org/
 
 # Dependencies:
 
